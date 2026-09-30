@@ -6,7 +6,7 @@ service cloud.firestore {
     function isTeam() {
       return request.auth != null
         && request.auth.token.email in [
-          'you@example.com'
+          'gem.tubalado@gmail.com'
           // , 'teammate@example.com'
         ];
     }
