@@ -4,15 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#F3F4FA">
-<meta name="description" content="DARKWIZ CT (Construction Toolkit): estimating, project control and procurement for construction.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="description" content="DARKWIZ Construction Toolkit (DARKWIZ CT): estimating, project control and procurement for construction.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DARKWIZ CT">
+<meta name="app-version" content="1.2.0+84b81db">
 <title>DARKWIZ Construction Toolkit</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -262,6 +265,34 @@ select.search{padding:5px 8px}
   .conv .eq{display:none}
 }
 
+/* brand, version, footer */
+.brand{display:flex;align-items:center;gap:9px}
+.brand .logo-mark{flex:none;display:block}
+.gate-logo{display:flex;justify-content:center;margin-bottom:-6px}
+.gate-logo .logo-mark{filter:drop-shadow(0 6px 16px color-mix(in srgb,var(--accent) 35%,transparent))}
+.ver{font-size:12px;color:var(--faint)}
+.ver a{color:var(--muted)}
+.gate{grid-template-rows:1fr auto;gap:18px}
+.gate-foot{font-size:12px;color:var(--faint);text-align:center}
+.gate-foot a{color:var(--muted)}
+.verchip{font-family:var(--mono);font-size:11px;border:1px solid var(--rule-strong);background:var(--surface);color:var(--muted);border-radius:999px;padding:2px 8px;cursor:pointer;white-space:nowrap}
+.verchip:hover{border-color:var(--accent);color:var(--accent)}
+.appfoot{grid-column:1/-1;display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:12px;margin-top:8px;font-size:12px;color:var(--faint)}
+.appfoot a,.linkbtn{color:var(--muted)}
+.linkbtn{border:0;background:none;padding:0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.cl h4{margin:0 0 4px;font-family:var(--display);font-size:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cl ul{margin:0;padding-left:20px;font-size:13px;display:grid;gap:3px}
+/* reference notes */
+.rnlist{display:grid;gap:8px;max-height:680px;overflow:auto;padding-right:2px}
+.rn{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;background:var(--sunk);display:grid;gap:4px}
+.rn.mine{border-color:color-mix(in srgb,var(--accent) 45%,var(--rule));background:var(--accent-soft)}
+.rn>header{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.rn>header .sp{flex:1}
+.rn-cl{font-size:12px;color:var(--accent)}
+.rn h4{margin:0;font-family:var(--display);font-size:14px;line-height:1.3}
+.rn-t{white-space:pre-line;font-size:13px;line-height:1.55}
+.rn footer{font-size:11.5px}
+mark{background:color-mix(in srgb,var(--s2) 28%,transparent);color:inherit;border-radius:2px;padding:0 1px}
 /* ---------- mobile ---------- */
 #main select{max-width:100%}
 .row>select.search{min-width:0;flex:1 1 180px}
@@ -273,6 +304,8 @@ select.search{padding:5px 8px}
   .top-in{flex-wrap:nowrap;padding-block:8px}
   .mclock{display:inline;font-size:12.5px;color:var(--ink)}
   .me img,.me span.nm{display:none}
+  .brand .bt{font-size:15px}
+  .appfoot{flex-direction:column}
   .bnav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--surface) 96%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom,0px)}
   .bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;padding:8px 0 7px;font-size:11px;font-weight:500;color:var(--muted);min-height:56px;cursor:pointer}
   .bnav button[aria-current="true"]{color:var(--accent)}
@@ -314,6 +347,7 @@ select.search{padding:5px 8px}
 <div id="app"></div>
 <script src="firebase-config.js"></script>
 <script>
+const APP = {"version": "1.2.0", "date": "2026-09-30", "build": "84b81db", "app": "DARKWIZ CT", "fullName": "DARKWIZ Construction Toolkit", "site": "https://darkwizlab.com", "publicChangelogClaude": "https://claude.ai/artifact/3vL9REESJEGURGWxZALgp5", "releases": [{"version": "1.2.0", "date": "2026-09-30", "title": "Versioning, new logo and reference notes", "changes": ["New: version number under the Login button and next to your account in the top bar, with a link to this changelog.", "New: DARKWIZ CT logo (roof truss with a spark) on the login page, top bar and browser tab.", "New: footer link to darkwizlab.com.", "New: Reference notes library on the References page — search provisions, filter by code and topic, and keep your own notes.", "Changed: clause bookmarks are now part of Reference notes.", "Changed: time zones show their GMT offset, for example (GMT+8) Asia Manila, in Settings and on the clock."]}, {"version": "1.1.1", "date": "2026-09-30", "title": "Renamed to DARKWIZ CT", "changes": ["Changed: app renamed from DARKWIZ QS to DARKWIZ CT (Construction Toolkit). Backups made under the old name still import."]}, {"version": "1.1.0", "date": "2026-09-30", "title": "Own website, mobile layout and quick quotations", "changes": ["New: can be hosted on your own website with email and password login, password reset by email and an online database.", "New: phone layout with a bottom tab bar; installable on the home screen.", "New: Quick quotation in Quick tools with Excel (live formulas and cost breakdown) and PDF export.", "New: contract documents can store a link to the file."]}, {"version": "1.0.0", "date": "2026-09-30", "title": "First release", "changes": ["Dashboard with project-filtered reports, calendar, to-do list and personal notes.", "Create and open projects: PERT/CPM scheduling, Gantt chart, bill of quantities and materials, billing management, plan vs actual.", "Material, labour and equipment database with price history; procurement requests, suppliers and budgets.", "Quick tools: quick estimate and unit, strength, size, code and other conversions.", "References, and settings for units, display and project defaults."]}]};
 'use strict';
 const VIEWS = {}; const ACT = {};
 /* ================= utilities ================= */
@@ -342,6 +376,11 @@ function todayISO() {
   try { const p = new Intl.DateTimeFormat('en-CA', { timeZone: S.settings.tz || undefined, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()); return p; }
   catch (e) { return isoOf(new Date()); }
 }
+function tzOffset(tz) {
+  try { const p = new Intl.DateTimeFormat('en-US', { timeZone: tz || undefined, timeZoneName: 'shortOffset' }).formatToParts(new Date()).find(x => x.type === 'timeZoneName'); const v = p ? p.value : 'GMT'; return v === 'GMT' ? 'GMT+0' : v; }
+  catch (e) { const m = -new Date().getTimezoneOffset(); return 'GMT' + (m >= 0 ? '+' : '−') + Math.floor(Math.abs(m) / 60) + (Math.abs(m) % 60 ? ':' + pad(Math.abs(m) % 60) : ''); }
+}
+function tzMinutes(tz) { const m = tzOffset(tz).match(/GMT([+\-−])(\d+)(?::(\d+))?/); if (!m) return 0; const v = num(m[2]) * 60 + num(m[3]); return m[1] === '+' ? v : -v; }
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const MONL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 function fdate(iso) {
@@ -1687,14 +1726,11 @@ const REF_LIB = [
 ];
 VIEWS.refs = function () {
   const inUse = new Set(S.settings.refsInUse || []);
-  const q = (S.ui.q_ref || '').toLowerCase();
-  const bm = S.refs.filter(r => !q || [r.code, r.title, r.clause, r.notes].join(' ').toLowerCase().includes(q)).sort((a, b) => String(a.code).localeCompare(b.code) || String(a.clause).localeCompare(b.clause));
-  return `<div class="page-head"><h1>References</h1><p>Pick the codes you work to, keep your own clause bookmarks, and look up the values you reach for most.</p></div>
+  return `<div class="page-head"><h1>References</h1><p>Pick the codes you work to, then search provision notes for those codes and keep your own.</p></div>
   <div class="grid2">
     <section class="box"><header><h2>Selection of references</h2><span class="sp"></span><span class="chip acc">${inUse.size} in use</span></header><div class="bd">
       ${['PH', 'BN'].map(g => `<div class="eyebrow">${g === 'PH' ? 'Philippines — NSCP, ACI, AISC, ASTM' : 'Brunei — Eurocodes & BS'}</div><div class="chkgrid">${REF_LIB.filter(r => r[2] === g).map(r => `<label><input type="checkbox" data-act="refToggle" data-code="${esc(r[0])}" ${inUse.has(r[0]) ? 'checked' : ''}><span><b>${esc(r[0])}</b><small>${esc(r[1])}</small></span></label>`).join('')}</div>`).join('')}
-      <div class="row"><b style="font-size:13px">Clause bookmarks</b><span style="flex:1"></span><input class="search" id="q_ref" data-ui="q_ref" placeholder="Search" value="${esc(S.ui.q_ref || '')}" style="width:140px" aria-label="Search bookmarks"><button class="btn sm pri" data-act="refEdit">+ Bookmark</button></div>
-      <div class="tw" style="max-height:300px"><table class="t"><thead><tr><th>Code</th><th>Clause</th><th>Title / what it says</th></tr></thead><tbody>${bm.length ? bm.map(r => `<tr class="click" data-act="refEdit" data-id="${r.id}"><td class="num">${esc(r.code)}</td><td class="num">${esc(r.clause || '')}</td><td>${esc(r.title)}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">link</a>` : ''}</td></tr>`).join('') : '<tr><td colspan="3"><div class="empty">Bookmark the clauses you cite often.</div></td></tr>'}</tbody></table></div>
+      <div class="msg">Codes you tick here set the default filter for Reference notes. Your saved clause notes live there too.</div>
     </div></section>
     <section class="box"><header><h2>Plumbing standards</h2></header><div class="bd">
       <div class="chkgrid">${[['NPCP', 'National Plumbing Code of the Philippines (1999), UPC-based'], ['UPC', 'Uniform Plumbing Code (IAPMO)'], ['BS EN 806', 'Water supply inside buildings (Brunei)'], ['BS EN 12056', 'Gravity drainage inside buildings (Brunei)']].map(([a, b]) => `<label style="cursor:default"><span><b>${a}</b><small>${b}</small></span></label>`).join('')}</div>
@@ -1707,17 +1743,10 @@ VIEWS.refs = function () {
       <div class="refcard"><h4>Minimum concrete cover (ACI 318-14 Table 20.6.1.3.1)</h4><div style="font-size:12.5px;display:grid;gap:2px"><span>Cast against and permanently exposed to earth: <b class="num">75 mm</b></span><span>Exposed to weather or earth, bars 20 mm and larger: <b class="num">50 mm</b>; 16 mm and smaller: <b class="num">40 mm</b></span><span>Not exposed — slabs, walls, joists: <b class="num">20 mm</b> (bars 36 mm and smaller)</span><span>Not exposed — beams, columns (to ties/stirrups): <b class="num">40 mm</b></span></div></div>
       <div class="tw"><table class="t"><thead><tr><th>Bar Ø</th><th class="n">Area mm²</th><th class="n">kg/m</th><th class="n">kg per 6 m</th><th class="n">kg per 12 m</th></tr></thead><tbody>${[8, 10, 12, 16, 20, 25, 28, 32, 36].map(d => `<tr><td class="num">${d} mm</td><td class="n">${fmt(Math.PI * d * d / 4, 1)}</td><td class="n">${fmt(d * d / 162.2, 3)}</td><td class="n">${fmt(d * d / 162.2 * 6, 2)}</td><td class="n">${fmt(d * d / 162.2 * 12, 2)}</td></tr>`).join('')}</tbody></table></div>
     </div></section>
-    <div class="box soon"><div><b>Code clause search</b>Soon: search inside the codes you selected.</div></div>
+    ${refNotesBox()}
   </div>`;
 };
 ACT.refToggle = el => { const s = new Set(S.settings.refsInUse || []); el.checked ? s.add(el.dataset.code) : s.delete(el.dataset.code); setSetting('refsInUse', [...s]); };
-ACT.refEdit = el => {
-  const id = el.dataset.id, x = S.refs.find(r => r.id === id) || {};
-  const spec = [{ k: 'code', l: 'Code', t: 'select', o: () => [...new Set([...(S.settings.refsInUse || []), ...REF_LIB.map(r => r[0])])] }, { k: 'clause', l: 'Clause / table', ph: 'e.g. 409.6.1.2' }, { k: 'title', l: 'Title / what it says', req: true, full: true }, { k: 'url', l: 'Link (optional)', full: true }, { k: 'notes', l: 'Notes', t: 'textarea' }];
-  openModal({ title: id ? 'Edit bookmark' : 'Add bookmark', extra: id ? '<button class="btn danger" id="refdel">Delete</button>' : '', body: fieldsHTML(spec, x),
-    onOpen: root => root.closest('.modal').querySelector('#refdel')?.addEventListener('click', async () => { await dbDel('refs/' + id); closeModal(); }),
-    onSave: async root => { if (!await saveItem('refs', { ...x, ...readFields(spec, root), id })) return false; } });
-};
 
 'use strict';
 /* ================= Quick quotation (Quick tools) ================= */
@@ -1917,6 +1946,146 @@ function buildQuotePdf(q) {
 }
 
 'use strict';
+/* ================= Reference notes library =================
+   Built-in entries are short paraphrased summaries with clause numbers, for quick lookup.
+   They are not the official text. [codes[], clause, title, topic, text] */
+const RN_TOPICS = ['Loads', 'Concrete', 'Steel', 'Timber', 'Materials & testing', 'Plumbing', 'Electrical', 'Building rules', 'Procurement & contracts'];
+const B = (codes, clause, title, topic, text) => ({ codes, clause, title, topic, text, builtin: true });
+const REF_NOTES = [
+  // ---------- loads ----------
+  B(['NSCP 2015'], '203.3.1', 'Load combinations — strength design (LRFD)', 'Loads', '1.4D\n1.2D + 1.6L + 0.5(Lr or R)\n1.2D + 1.6(Lr or R) + (f1·L or 0.5W)\n1.2D + 1.0W + f1·L + 0.5(Lr or R)\n1.2D + 1.0E + f1·L\n0.9D + 1.0W\n0.9D + 1.0E\nf1 = 1.0 for garages, places of public assembly and live loads over 4.8 kPa; 0.5 for other live loads.'),
+  B(['NSCP 2015'], '203.4.1', 'Load combinations — allowable stress design (ASD)', 'Loads', 'D\nD + L\nD + (Lr or R)\nD + 0.75L + 0.75(Lr or R)\nD + (0.6W or E/1.4)\nD + 0.75(0.6W) + 0.75L + 0.75(Lr or R)\nD + 0.75(E/1.4) + 0.75L + 0.75(Lr or R)\n0.6D + 0.6W\n0.6D + E/1.4'),
+  B(['NSCP 2015'], 'Table 205-1', 'Minimum uniform live loads (common occupancies)', 'Loads', 'Residential, basic floor area: 1.9 kPa\nOffices: 2.4 kPa\nSchool classrooms: 1.9 kPa\nExit facilities (corridors, stairs serving public): 4.8 kPa\nRetail stores: 4.8 kPa\nStorage, light: 6.0 kPa; heavy: 12.0 kPa\nCheck the table for concentrated loads and other occupancies.'),
+  B(['NSCP 2015'], '208.4.4 / Table 208-3', 'Seismic zone factor Z', 'Loads', 'Zone 2: Z = 0.20 (Palawan except Busuanga, Sulu, Tawi-Tawi).\nZone 4: Z = 0.40 (rest of the Philippines).\nNear-source factors Na and Nv apply in Zone 4 depending on distance to the nearest active fault and seismic source type.'),
+  B(['NSCP 2015'], 'Table 208-1', 'Seismic importance factor I', 'Loads', 'Essential facilities (hospitals, fire and police stations, emergency centres): 1.50\nHazardous facilities: 1.25\nSpecial occupancy, standard occupancy and miscellaneous structures: 1.00'),
+  B(['EN 1990'], 'Table A1.2(B)', 'Partial factors for actions (ULS, STR/GEO)', 'Loads', 'Permanent actions γG = 1.35 (unfavourable), 1.00 (favourable).\nVariable actions γQ = 1.50 (unfavourable), 0 (favourable).\nEq. 6.10: 1.35Gk + 1.5Qk,1 + 1.5ψ0,iQk,i. Eq. 6.10a/6.10b (UK NA) may give lower values.'),
+  B(['EN 1990'], 'Table A1.1', 'Combination factors ψ0, ψ1, ψ2 (buildings)', 'Loads', 'Cat. A domestic / B offices: ψ0 0.7, ψ1 0.5, ψ2 0.3\nCat. C congregation / D shopping: 0.7, 0.7, 0.6\nCat. E storage: 1.0, 0.9, 0.8\nWind: ψ0 0.6 (UK NA 0.5), ψ1 0.2, ψ2 0'),
+  B(['EN 1991'], 'EN 1991-1-1 Table 6.2 (UK NA)', 'Imposed floor loads (selected)', 'Loads', 'Category A (domestic floors): 1.5 kN/m²\nCategory B (offices, general use): 2.5 kN/m²\nValues follow the UK National Annex; check the NA adopted for the project.'),
+  // ---------- concrete ----------
+  B(['NSCP 2015', 'ACI 318-14'], '421.2.1 (ACI 21.2.1)', 'Strength reduction factors φ', 'Concrete', 'Tension-controlled sections: 0.90\nCompression-controlled, tied: 0.65; spiral: 0.75\nTransition zone: interpolate on net tensile strain εt between εty and 0.005\nShear and torsion: 0.75\nBearing: 0.65'),
+  B(['NSCP 2015', 'ACI 318-14'], '422.2.2 (ACI 22.2.2)', 'Flexure assumptions — stress block', 'Concrete', 'Maximum concrete strain εcu = 0.003.\nEquivalent rectangular stress 0.85fc′ over depth a = β1·c.\nβ1 = 0.85 for fc′ ≤ 28 MPa, reducing 0.05 per 7 MPa above 28, minimum 0.65.'),
+  B(['NSCP 2015', 'ACI 318-14'], '409.3.1.1 (ACI Table 9.3.1.1)', 'Minimum beam depth (deflection not calculated)', 'Concrete', 'Simply supported ℓ/16 · one end continuous ℓ/18.5 · both ends continuous ℓ/21 · cantilever ℓ/8.\nFor normal-weight concrete and fy = 420 MPa; for other fy multiply by (0.4 + fy/700). Applies to members not supporting partitions likely to be damaged by deflection.'),
+  B(['NSCP 2015', 'ACI 318-14'], '407.3.1.1 (ACI Table 7.3.1.1)', 'Minimum one-way slab thickness', 'Concrete', 'Simply supported ℓ/20 · one end continuous ℓ/24 · both ends continuous ℓ/28 · cantilever ℓ/10.\nSame fy adjustment as beams: × (0.4 + fy/700).'),
+  B(['NSCP 2015', 'ACI 318-14'], '409.6.1.2 (ACI 9.6.1.2)', 'Minimum flexural reinforcement, beams', 'Concrete', 'As,min = the larger of 0.25√fc′/fy · bw·d and 1.4/fy · bw·d.\nNot required if As provided is at least one-third more than required by analysis.'),
+  B(['NSCP 2015', 'ACI 318-14'], '424.4.3.2 (ACI 24.4.3.2)', 'Shrinkage and temperature reinforcement (slabs)', 'Concrete', 'Minimum ratio to gross area: 0.0020 for Grade 280/350 deformed bars; 0.0018 for Grade 420 deformed bars or welded wire.\nSpacing not more than 5h or 450 mm, whichever is smaller.'),
+  B(['NSCP 2015', 'ACI 318-14'], '410.6.1.1 (ACI 10.6.1.1)', 'Column longitudinal reinforcement limits', 'Concrete', 'Ast between 0.01Ag and 0.08Ag.\nMinimum bars: 4 in rectangular or circular ties, 6 with spirals.\nSpecial moment frames (Sec. 418.7.4): 0.01Ag to 0.06Ag.'),
+  B(['NSCP 2015', 'ACI 318-14'], '420.6.1.3.1 (ACI Table 20.6.1.3.1)', 'Specified concrete cover — cast-in-place, nonprestressed', 'Concrete', 'Cast against and permanently in contact with ground: 75 mm\nExposed to weather or ground: bars 20 mm (No. 6) and larger 50 mm; 16 mm (No. 5) and smaller 40 mm\nNot exposed — slabs, joists, walls: 20 mm for bars 36 mm and smaller; 40 mm for 43 and 57 mm bars\nNot exposed — beams, columns, pedestals (to stirrups/ties): 40 mm'),
+  B(['NSCP 2015', 'ACI 318-14'], '422.5.5.1 (ACI 22.5.5.1)', 'Concrete shear strength Vc (simplified)', 'Concrete', 'Vc = 0.17λ√fc′ · bw · d (N, MPa, mm).\nStirrups required where Vu > 0.5φVc (with listed exceptions).\nVs ≤ 0.66√fc′ · bw · d, otherwise enlarge the section.'),
+  B(['NSCP 2015', 'ACI 318-14'], '409.7.6.2.2 (ACI 9.7.6.2.2)', 'Maximum stirrup spacing, beams', 'Concrete', 'Vs ≤ 0.33√fc′·bw·d: smax = the lesser of d/2 and 600 mm.\nVs > 0.33√fc′·bw·d: smax = the lesser of d/4 and 300 mm.\nMinimum Av/s = the larger of 0.062√fc′·bw/fyt and 0.35bw/fyt.'),
+  B(['NSCP 2015', 'ACI 318-14'], '425.2.1 (ACI 25.2.1)', 'Minimum clear spacing of bars', 'Concrete', 'Parallel bars in a layer: at least the greatest of 25 mm, db and (4/3)·dagg.\nBars in upper layers placed directly above those below, with at least 25 mm clear between layers.'),
+  B(['NSCP 2015', 'ACI 318-14'], '425.4.2.3 (ACI 25.4.2.3)', 'Development length of straight bars in tension (simplified)', 'Concrete', 'With clear spacing ≥ db, clear cover ≥ db and minimum stirrups (or clear spacing ≥ 2db and cover ≥ db):\nbars 19 mm and smaller: ℓd = fy·ψt·ψe / (2.1λ√fc′) · db\nbars 22 mm and larger: ℓd = fy·ψt·ψe / (1.7λ√fc′) · db\nOther cases use 1.4 and 1.1 in the denominator. ℓd ≥ 300 mm.\nψt = 1.3 for top bars with more than 300 mm of fresh concrete below; ψe = 1.5 or 1.2 for epoxy-coated bars.'),
+  B(['NSCP 2015', 'ACI 318-14'], '425.5.2.1 (ACI 25.5.2.1)', 'Tension lap splices', 'Concrete', 'Class A: 1.0ℓd; Class B: 1.3ℓd; never less than 300 mm.\nClass A applies where As provided ≥ 2 × required and no more than half the bars are spliced within the lap length; otherwise Class B.'),
+  B(['NSCP 2015', 'ACI 318-14'], '425.3 (ACI 25.3.1, 25.3.2)', 'Standard hooks', 'Concrete', 'Main bars: 90° hook with 12db extension; 180° hook with 4db extension, not less than 65 mm.\nStirrups and ties 16 mm and smaller: 90° or 135° hook with 6db extension, not less than 75 mm.\nSeismic hoops (Ch. 18): 135° hook with 6db, not less than 75 mm.'),
+  B(['NSCP 2015', 'ACI 318-14'], 'Table 424.2.2 (ACI Table 24.2.2)', 'Maximum permissible deflections', 'Concrete', 'Flat roofs not supporting damageable elements, immediate live load: ℓ/180\nFloors not supporting damageable elements, immediate live load: ℓ/360\nSupporting elements likely to be damaged, long-term + additional live load: ℓ/480\nSupporting elements not likely to be damaged: ℓ/240'),
+  B(['NSCP 2015', 'ACI 318-14'], '426.12.3.1 (ACI 26.12.3.1)', 'Acceptance of concrete strength tests', 'Materials & testing', 'Strength level is acceptable when both hold:\n(a) every average of three consecutive strength tests ≥ fc′\n(b) no single test is below fc′ − 3.5 MPa (fc′ ≤ 35 MPa) or 0.90fc′ (fc′ > 35 MPa).\nA strength test = average of two 150×300 mm or three 100×200 mm cylinders at 28 days (or the specified age).'),
+  B(['NSCP 2015', 'ACI 318-14'], '426.12.2.1 (ACI 26.12.2.1)', 'Frequency of sampling for strength tests', 'Materials & testing', 'For each class of concrete, sample at least:\nonce a day of placement,\nonce per 110 m³,\nonce per 460 m² of slab or wall surface.'),
+  B(['NSCP 2015', 'ACI 318-14'], '418.7.5 (ACI 18.7.5)', 'Special moment frame columns — confinement', 'Concrete', 'Length lo at each end ≥ the largest of: member depth h, clear height/6, 450 mm.\nHoop spacing within lo ≤ the smallest of: 1/4 of minimum column dimension, 6db of smallest longitudinal bar (Grade 420), and so = 100 + (350 − hx)/3, with 100 ≤ so ≤ 150 mm.'),
+  B(['NSCP 2015', 'ACI 318-14'], '418.6.3 (ACI 18.6.3)', 'Special moment frame beams — longitudinal steel', 'Concrete', 'At least two continuous bars top and bottom.\nReinforcement ratio ρ ≤ 0.025.\nPositive moment strength at the joint face ≥ 1/2 of negative moment strength there.'),
+  B(['EN 1992'], '2.4.2.4 / 3.1.6', 'Partial factors and design strengths', 'Concrete', 'γc = 1.5, γs = 1.15 (persistent and transient).\nfcd = αcc·fck/γc, with αcc = 0.85 in the UK NA for flexure (recommended value 1.0).\nfyd = fyk/1.15 ≈ 435 MPa for B500.'),
+  B(['EN 1992'], 'Table 3.1', 'Concrete strength classes and fctm', 'Concrete', 'Classes are written C fck,cyl / fck,cube, for example C25/30, C30/37, C35/45.\nMean tensile strength fctm = 0.30·fck^(2/3) for classes up to C50/60.\nEcm = 22·(fcm/10)^0.3 GPa, where fcm = fck + 8 MPa.'),
+  B(['EN 1992'], '4.4.1', 'Concrete cover', 'Concrete', 'c,nom = c,min + Δc,dev (recommended Δc,dev = 10 mm).\nc,min = max(c,min,b bond; c,min,dur durability + adjustments; 10 mm).\nc,min,dur depends on exposure class and structural class (Table 4.4N).'),
+  B(['EN 1992'], 'Table 4.1', 'Exposure classes', 'Concrete', 'X0 no risk.\nXC1–XC4 carbonation (dry → cyclic wet/dry).\nXD1–XD3 chlorides not from sea water.\nXS1–XS3 chlorides from sea water (airborne → tidal/splash).\nXF freeze-thaw; XA chemical attack.'),
+  B(['EN 1992'], '9.2.1.1 / 9.2.2', 'Beam reinforcement limits', 'Concrete', 'As,min = 0.26·fctm/fyk · bt·d, not less than 0.0013·bt·d.\nAs,max = 0.04Ac outside lap locations.\nShear links: ρw,min = 0.08√fck / fyk; maximum longitudinal spacing 0.75d.'),
+  B(['EN 1992'], '9.5.2', 'Column reinforcement limits', 'Concrete', 'As,min = max(0.10·NEd/fyd, 0.002Ac).\nAs,max = 0.04Ac outside laps (0.08Ac at laps).\nMinimum bar diameter 8 mm (UK NA: 12 mm).'),
+  B(['EN 1992'], '7.4.2 / Table 7.4N', 'Basic span/effective depth ratios', 'Concrete', 'Highly stressed (ρ = 1.5%) / lightly stressed (ρ = 0.5%):\nSimply supported: 14 / 20\nEnd span of continuous: 18 / 26\nInterior span: 20 / 30\nCantilever: 6 / 8\nAppearance limit span/250; after construction span/500 (7.4.1).'),
+  // ---------- steel ----------
+  B(['AISC 360-10', 'NSCP 2015'], 'Resistance factors (Ch. D–J)', 'LRFD resistance factors φ', 'Steel', 'Tension yielding 0.90; tension rupture 0.75\nCompression 0.90\nFlexure 0.90\nShear 0.90 (1.00 for most rolled I-shape webs, G2.1a)\nBolts and welds 0.75; bearing at bolt holes 0.75'),
+  B(['AISC 360-10', 'NSCP 2015'], 'Table B4.1a/b', 'Width-to-thickness limits (rolled I-shapes)', 'Steel', 'Flanges in flexure: λp = 0.38√(E/Fy), λr = 1.0√(E/Fy)\nWebs in flexure: λp = 3.76√(E/Fy), λr = 5.70√(E/Fy)\nFlanges in axial compression: λr = 0.56√(E/Fy)\nWebs in axial compression: λr = 1.49√(E/Fy)'),
+  B(['AISC 360-10', 'NSCP 2015'], 'E2, D1', 'Slenderness limits', 'Steel', 'Compression members: KL/r preferably not over 200.\nTension members: L/r preferably not over 300 (does not apply to rods or hangers in tension).'),
+  B(['AISC 360-10', 'NSCP 2015'], 'E3', 'Flexural buckling stress Fcr', 'Steel', 'Fe = π²E/(KL/r)².\nKL/r ≤ 4.71√(E/Fy): Fcr = 0.658^(Fy/Fe) · Fy\nKL/r > 4.71√(E/Fy): Fcr = 0.877Fe\nφcPn = 0.90 · Fcr · Ag'),
+  B(['AISC 360-10', 'NSCP 2015'], 'F2.2', 'Lateral-torsional buckling limits Lp and Lr', 'Steel', 'Lp = 1.76·ry·√(E/Fy)\nLr = 1.95·rts·E/(0.7Fy) · √( Jc/(Sx·ho) + √( (Jc/(Sx·ho))² + 6.76(0.7Fy/E)² ) )\nLb ≤ Lp: Mn = Mp. Lp < Lb ≤ Lr: linear between Mp and 0.7FySx, times Cb. Lb > Lr: elastic LTB.'),
+  B(['AISC 360-10', 'NSCP 2015'], 'Table J2.4, J2.2b', 'Fillet weld size limits', 'Steel', 'Minimum leg size by thinner part joined: up to 6 mm → 3 mm; over 6 to 13 → 5 mm; over 13 to 19 → 6 mm; over 19 → 8 mm.\nMaximum along edges: thickness of the part if under 6 mm; otherwise thickness minus 2 mm.\nMinimum effective length: 4 × nominal weld size.'),
+  B(['AISC 360-10', 'NSCP 2015'], 'Table J3.2', 'Bolt nominal strengths', 'Steel', 'A325 (Group A): Fnt = 620 MPa; Fnv = 372 MPa threads included (N), 469 MPa threads excluded (X).\nA490 (Group B): Fnt = 780 MPa; Fnv = 469 MPa (N), 579 MPa (X).\nφ = 0.75.'),
+  B(['AISC 360-10', 'NSCP 2015'], 'J3.3, J3.5', 'Bolt spacing', 'Steel', 'Minimum centre-to-centre spacing: 2⅔d, preferably 3d.\nMaximum spacing for painted members or unpainted members not subject to corrosion: 24 × thinner plate thickness, not over 305 mm.\nMinimum edge distances: Table J3.4.'),
+  B(['EN 1993'], '6.1 (UK NA)', 'Partial factors γM', 'Steel', 'γM0 = 1.00 (cross-section resistance)\nγM1 = 1.00 (member buckling)\nγM2 = 1.25 (fracture of net sections, bolts, welds; UK NA uses 1.10 for net-section tension)'),
+  B(['EN 1993'], 'Table 5.2', 'Cross-section classification (ε = √(235/fy))', 'Steel', 'Outstand flange in compression: Class 1 ≤ 9ε, Class 2 ≤ 10ε, Class 3 ≤ 14ε.\nInternal web in bending: 72ε, 83ε, 124ε.\nInternal part in compression: 33ε, 38ε, 42ε.'),
+  B(['EN 1993'], 'UK NA NA.2.23', 'Suggested vertical deflection limits (imposed load)', 'Steel', 'Cantilevers: length/180\nBeams carrying plaster or other brittle finish: span/360\nOther beams (except purlins and sheeting rails): span/200\nPurlins and sheeting rails: to suit cladding'),
+  // ---------- timber ----------
+  B(['EN 1995'], 'Table 3.1, 2.4.1', 'kmod and γM (solid timber, glulam)', 'Timber', 'Service class 1 and 2: permanent 0.60, long-term 0.70, medium-term 0.80, short-term 0.90, instantaneous 1.10.\nγM = 1.30 solid timber, 1.25 glulam (UK NA).\nkdef = 0.60 (SC1), 0.80 (SC2), 2.00 (SC3) for solid timber.'),
+  // ---------- materials ----------
+  B(['ASTM'], 'A615/A615M', 'Deformed steel bars for concrete', 'Materials & testing', 'Grade 40 (280): fy ≥ 280 MPa, fu ≥ 420 MPa\nGrade 60 (420): fy ≥ 420 MPa, fu ≥ 620 MPa\nGrade 75 (520): fy ≥ 520 MPa, fu ≥ 690 MPa\nGrade 80 (550): fy ≥ 550 MPa, fu ≥ 725 MPa\nPhilippine bars follow PNS 49 with similar grades (230, 275, 415).'),
+  B(['ASTM'], 'A36, A572, A992', 'Structural steel grades', 'Materials & testing', 'A36: Fy 250 MPa, Fu 400–550 MPa\nA572 Grade 50: Fy 345 MPa, Fu 450 MPa\nA992 (W-shapes): Fy 345–450 MPa, Fu ≥ 450 MPa, Fy/Fu ≤ 0.85'),
+  B(['ASTM'], 'C150', 'Portland cement types', 'Materials & testing', 'Type I general use · Type II moderate sulfate resistance · Type III high early strength · Type IV low heat of hydration · Type V high sulfate resistance.'),
+  B(['ASTM'], 'C31, C39, C143', 'Concrete field tests', 'Materials & testing', 'C31: making and curing test cylinders in the field; standard curing at 23 ± 2 °C.\nC39: compressive strength of cylinders; load at 0.25 ± 0.05 MPa/s.\nC143: slump using the 300 mm cone, measured to the nearest 5 mm.'),
+  B(['ASTM'], 'C33, C136', 'Aggregates', 'Materials & testing', 'C33: grading and quality limits for fine and coarse aggregate.\nC136: sieve analysis method used to check the grading.'),
+  B(['ASTM'], 'D698, D1557', 'Soil compaction (Proctor)', 'Materials & testing', 'D698 standard effort ≈ 600 kN·m/m³.\nD1557 modified effort ≈ 2,700 kN·m/m³.\nField density is compared with the lab maximum dry density (e.g. 95% of modified Proctor).'),
+  // ---------- plumbing ----------
+  B(['NPCP'], 'Fixture unit tables (UPC-based)', 'Water supply and drainage fixture units', 'Plumbing', 'WSFU private/public: WC flush tank 3/5; WC flush valve 6/10; lavatory 1/2; shower 2/4; bathtub 2/4; kitchen sink 2/4.\nDFU: WC 4 (flush valve 6); lavatory 1; shower 2; bathtub 2; kitchen sink 2; floor drain 2; clothes washer 3.\nDemand from WSFU via Hunter\'s curve.'),
+  B(['NPCP'], 'Horizontal drainage (UPC 708)', 'Drain slope', 'Plumbing', 'Minimum uniform slope 2% (¼ in per ft) toward the point of disposal.\n1% (⅛ in per ft) is allowed for pipes 4 in (100 mm) and larger where 2% is impractical.'),
+  B(['NPCP'], 'Traps and drains', 'Traps, trap seals and minimum sizes', 'Plumbing', 'Each fixture is separately trapped and vented.\nTrap seal 50 to 100 mm (2 to 4 in).\nMinimum trap sizes: lavatory 1¼ in; bathtub, kitchen sink, laundry tray 1½ in; shower and floor drain 2 in; water closet 3 in.\nNo water closet on a drain smaller than 3 in.'),
+  B(['NPCP'], 'Cleanouts (UPC 707)', 'Cleanout locations', 'Plumbing', 'At the upper end of every horizontal drain, at each aggregate horizontal change of direction exceeding 135°, and at intervals of not more than 30 m (100 ft) of horizontal run.\nKeep cleanouts accessible with working clearance.'),
+  B(['BS EN 806'], 'EN 806-3', 'Loading units (simplified pipe sizing)', 'Plumbing', 'Typical loading units: washbasin 1, WC cistern 1, shower 2, kitchen sink 2, washing machine 2, bath 4.\nSum the LU on each section and read the pipe size from the material table.'),
+  // ---------- electrical ----------
+  B(['PEC 2017'], '2.10.2.19 (NEC 210.19)', 'Branch-circuit conductor sizing', 'Electrical', 'Conductors sized for the non-continuous load plus 125% of the continuous load.\nInformational note: branch circuit voltage drop up to 3%, feeder + branch up to 5% total.'),
+  B(['PEC 2017'], '2.40.1.4(D) (NEC 240.4(D))', 'Small conductor overcurrent protection', 'Electrical', 'Copper: 2.0 mm² (14 AWG) → 15 A; 3.5 mm² (12 AWG) → 20 A; 5.5 mm² (10 AWG) → 30 A maximum OCPD, unless specifically permitted otherwise.'),
+  B(['PEC 2017'], '2.10.1.8 (NEC 210.8)', 'Ground-fault circuit interrupter (GFCI) locations — dwellings', 'Electrical', '125 V, 15 and 20 A receptacles in bathrooms, garages, outdoors, crawl spaces, unfinished basements, kitchen countertops, and within 1.8 m of sinks, laundry and wet bar areas need GFCI protection.'),
+  B(['PEC 2017'], '2.10.3.52 (NEC 210.52)', 'Dwelling receptacle spacing', 'Electrical', 'Along walls of habitable rooms, no point along the floor line more than 1.8 m from a receptacle; any wall space 600 mm or wider needs one.\nKitchen countertops: no point more than 600 mm from a receptacle.'),
+  B(['PEC 2017'], '2.50.3.53 (NEC 250.53)', 'Grounding electrode resistance', 'Electrical', 'A single rod, pipe or plate electrode with resistance to earth over 25 Ω needs a supplemental electrode, spaced at least 1.8 m apart.'),
+  B(['BS 7671'], 'Appendix 4, Table 4Ab', 'Voltage drop limits', 'Electrical', 'Installations supplied from the public low-voltage network: lighting 3%, other uses 5%.\nPrivate supply: lighting 6%, other uses 8%.'),
+  B(['BS 7671'], '411.3.3, 415.1', 'Additional protection by 30 mA RCD', 'Electrical', 'Socket outlets rated up to 32 A for general use, and mobile equipment up to 32 A used outdoors, need an RCD of 30 mA rated residual operating current.\nCables in walls under 50 mm depth without earthed protection also need 30 mA RCD protection (522.6).'),
+  B(['BS 7671'], 'Table 41.3 (18th ed.)', 'Maximum earth fault loop impedance Zs, Type B MCBs (0.4 s)', 'Electrical', 'B6: 7.28 Ω · B10: 4.37 Ω · B16: 2.73 Ω · B20: 2.19 Ω · B32: 1.37 Ω · B40: 1.09 Ω.\nType C values are half of Type B.'),
+  // ---------- building rules ----------
+  B(['PD 1096'], 'IRR Rule VIII', 'Minimum room sizes', 'Building rules', 'Rooms for human habitation: 6.00 m² with least dimension 2.00 m.\nKitchens: 3.00 m² with least dimension 1.50 m.\nToilet and bath: 1.20 m² with least dimension 0.90 m.'),
+  B(['PD 1096'], 'IRR Rule VIII', 'Natural light and ventilation', 'Building rules', 'Habitable rooms need window openings of at least 10% of the floor area, opening directly to a court, yard, street or public space.\nToilets and baths without windows need mechanical ventilation.'),
+  // ---------- procurement ----------
+  B(['RA 9184'], 'IRR Sec. 27.2', 'Bid security', 'Procurement & contracts', 'Cash, cashier\'s/manager\'s check, bank draft or irrevocable letter of credit: 2% of ABC.\nSurety bond: 5% of ABC.\nOr a Bid-Securing Declaration.'),
+  B(['RA 9184'], 'IRR Sec. 39.2', 'Performance security (infrastructure)', 'Procurement & contracts', 'Cash, cashier\'s/manager\'s check, bank draft or irrevocable letter of credit: 10% of contract price.\nSurety bond: 30% of contract price.\nBank guarantee: 10%.'),
+  B(['RA 9184'], 'IRR Annex E', 'Advance payment, retention and slippage', 'Procurement & contracts', 'Advance payment up to 15% of the contract price, against an irrevocable standby letter of credit or bank guarantee, recouped from progress billings.\nRetention of 10% of each progress billing; after 50% completion, no further retention if work is satisfactory.\nNegative slippage of 10% triggers a warning; 15% or more may lead to termination.'),
+  B(['RA 9184'], 'IRR Sec. 62.2.3.2', 'Warranty against structural defects', 'Procurement & contracts', 'Permanent structures (buildings of types 4 and 5, steel/concrete bridges, dams, etc.): 15 years from final acceptance.\nSemi-permanent structures: 5 years.\nOther structures: 2 years.'),
+  B(['RA 9184'], 'IRR Sec. 68', 'Liquidated damages', 'Procurement & contracts', 'One-tenth of one percent (0.1%) of the cost of the unperformed portion for every day of delay.\nWhen damages reach 10% of the contract amount, the procuring entity may rescind or terminate the contract.'),
+];
+
+function rnAll() {
+  const mine = S.refs.map(r => ({ id: r.id, codes: [r.code], clause: r.clause, title: r.title, topic: r.topic || '', text: r.text || r.notes || '', url: r.url, builtin: false }));
+  return [...mine, ...REF_NOTES.map((n, i) => ({ ...n, id: 'b' + i }))];
+}
+function hiText(s, q) {
+  const t = esc(s); if (!q) return t;
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '|') + ')', 'ig');
+  return t.replace(re, '<mark>$1</mark>');
+}
+function refNotesBox() {
+  const f = S.ui.rn || (S.ui.rn = { scope: 'inuse', code: '', topic: '', q: '' });
+  const inUse = new Set(S.settings.refsInUse || []);
+  const all = rnAll();
+  const codesPresent = [...new Set(all.flatMap(n => n.codes))].sort();
+  const q = String(f.q || '').trim().toLowerCase(), terms = q.split(/\s+/).filter(Boolean);
+  const scoped = all.filter(n => f.code ? n.codes.includes(f.code) : f.scope === 'all' || !n.builtin || n.codes.some(c => inUse.has(c)));
+  const list = scoped.filter(n => (!f.topic || n.topic === f.topic) && (!terms.length || terms.every(t => [n.codes.join(' '), n.clause, n.title, n.topic, n.text].join(' ').toLowerCase().includes(t))));
+  const hidden = f.scope === 'inuse' && !f.code ? all.filter(n => n.builtin && !n.codes.some(c => inUse.has(c))).length : 0;
+  return `<section class="box" id="refnotes"><header><h2>Reference notes</h2><span class="chip">${list.length}</span><span class="sp"></span><button class="btn sm pri" data-act="refEdit">+ My note</button></header><div class="bd">
+    <input class="search" id="rn-q" data-rn="q" placeholder="Search provisions: e.g. cover, lap splice, 409.6, slope, retention" value="${esc(f.q)}" aria-label="Search reference notes" style="width:100%">
+    <div class="row">
+      <select class="search" id="rn-code" data-rn="code" aria-label="Code"><option value="">${f.scope === 'all' ? 'All codes' : 'Codes in use'}</option>${codesPresent.map(c => `<option${c === f.code ? ' selected' : ''}>${esc(c)}</option>`).join('')}</select>
+      <select class="search" id="rn-topic" data-rn="topic" aria-label="Topic"><option value="">All topics</option>${RN_TOPICS.map(t => `<option${t === f.topic ? ' selected' : ''}>${t}</option>`).join('')}</select>
+      <label class="row" style="gap:6px;font-size:12.5px;flex:none"><input type="checkbox" data-rn="scope" ${f.scope === 'all' ? 'checked' : ''} style="accent-color:var(--accent)">Include codes not in use</label>
+    </div>
+    ${hidden ? `<div class="faint" style="font-size:12px">${hidden} more notes are in codes you haven't selected. Tick the box above or pick a code to see them.</div>` : ''}
+    <div class="rnlist" data-keep-scroll="rn">${list.length ? list.map(n => `<article class="rn${n.builtin ? '' : ' mine'}">
+      <header><span class="chip acc">${esc(n.codes[0])}</span>${n.codes.slice(1).map(c => `<span class="chip">${esc(c)}</span>`).join('')}<span class="num rn-cl">${hiText(n.clause || '', terms.join(' '))}</span><span class="sp"></span>${n.builtin ? `<button class="btn sm ghost" data-act="refCopy" data-id="${n.id}" title="Copy into your own notes to edit or add the exact wording">Copy to my notes</button>` : `<button class="btn sm ghost" data-act="refEdit" data-id="${n.id}">Edit</button>`}</header>
+      <h4>${hiText(n.title, terms.join(' '))}</h4>
+      <div class="rn-t">${hiText(n.text, terms.join(' '))}</div>
+      <footer><span class="faint">${n.builtin ? 'Built-in summary' : 'Your note'}${n.topic ? ' · ' + esc(n.topic) : ''}</span>${n.url && /^https?:\/\//.test(n.url) ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Source link</a>` : ''}</footer>
+    </article>`).join('') : '<div class="empty">No notes match. Try fewer words, another code, or include codes not in use.</div>'}</div>
+    <p class="faint" style="margin:0;font-size:11.5px">Built-in notes are short paraphrased summaries for quick lookup, not the official code text. Check the edition adopted for your project before citing, and use <b>Copy to my notes</b> to keep the exact wording from your own copy.</p>
+  </div></section>`;
+}
+function onRnChange(el) {
+  const f = S.ui.rn, k = el.dataset.rn;
+  if (k === 'scope') f.scope = el.checked ? 'all' : 'inuse'; else f[k] = el.value;
+  scheduleRender(true);
+}
+const RN_SPEC = () => [{ k: 'code', l: 'Code', t: 'select', o: () => [...new Set([...(S.settings.refsInUse || []), ...REF_LIB.map(r => r[0])])] }, { k: 'clause', l: 'Clause / table', ph: 'e.g. 409.6.1.2' }, { k: 'topic', l: 'Topic', t: 'select', o: ['', ...RN_TOPICS] }, { k: 'title', l: 'Title', req: true, full: true }, { k: 'text', l: 'Provision / notes', t: 'textarea', ph: 'Paste the exact wording from your copy of the code, plus your own notes.' }, { k: 'url', l: 'Source link (optional)', full: true }];
+ACT.refEdit = el => {
+  const id = el.dataset.id, x0 = S.refs.find(r => r.id === id), x = x0 ? { ...x0, text: x0.text || x0.notes || '' } : (S.ui.rnDraft || {});
+  S.ui.rnDraft = null;
+  openModal({ title: id ? 'Edit note' : 'Add reference note', wide: true, extra: id ? '<button class="btn danger" id="refdel">Delete</button>' : '', body: fieldsHTML(RN_SPEC(), x),
+    onOpen: root => { const ta = root.querySelector('textarea'); if (ta) ta.style.minHeight = '220px'; root.closest('.modal').querySelector('#refdel')?.addEventListener('click', async () => { await dbDel('refs/' + id); closeModal(); }); },
+    onSave: async root => { const v = readFields(RN_SPEC(), root); if (!await saveItem('refs', { ...(x0 || {}), ...v, notes: v.text, id })) return false; toast('Note saved.'); } });
+};
+ACT.refCopy = el => { const n = REF_NOTES[num(el.dataset.id.slice(1))]; if (!n) return; S.ui.rnDraft = { code: n.codes[0], clause: n.clause, topic: n.topic, title: n.title, text: n.text + '\n\n(Built-in summary copied; replace with the exact wording from your copy.)' }; ACT.refEdit({ dataset: {} }); };
+
+'use strict';
 function setSetting(path, v) {
   const ks = path.split('.'); let o = S.settings; ks.slice(0, -1).forEach(k => o = o[k] = o[k] || {}); o[ks[ks.length - 1]] = v;
   if (path === 'theme') applyTheme();
@@ -1925,7 +2094,8 @@ function setSetting(path, v) {
 function saveSettings() { if (S.privPath) queueSet(S.privPath('profile'), () => deepClone(S.settings), 500); else localSave('profile', S.settings); }
 function localSave(k, v) { try { localStorage.setItem('dwqs.priv.' + k, JSON.stringify(v)); } catch (e) { } }
 function localLoad(k) { try { return JSON.parse(localStorage.getItem('dwqs.priv.' + k)); } catch (e) { return null; } }
-const TZS = ['Asia/Manila', 'Asia/Brunei', 'Asia/Singapore', 'Asia/Kuala_Lumpur', 'Asia/Dubai', 'Asia/Riyadh', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/London', 'America/Los_Angeles', 'UTC'];
+const TZS = ['Asia/Manila', 'Asia/Brunei', 'Asia/Singapore', 'Asia/Kuala_Lumpur', 'Asia/Hong_Kong', 'Asia/Taipei', 'Asia/Shanghai', 'Asia/Jakarta', 'Asia/Bangkok', 'Asia/Ho_Chi_Minh', 'Asia/Tokyo', 'Asia/Seoul', 'Australia/Perth', 'Australia/Sydney', 'Pacific/Auckland', 'Asia/Kolkata', 'Asia/Dubai', 'Asia/Qatar', 'Asia/Riyadh', 'Asia/Kuwait', 'Europe/London', 'Europe/Berlin', 'America/New_York', 'America/Chicago', 'America/Los_Angeles', 'Pacific/Honolulu', 'UTC'];
+const tzOptions = () => TZS.map(z => [z, tzMinutes(z), tzOffset(z)]).sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0])).map(([z, , o]) => [z, `(${o}) ${z.replace(/_/g, ' ')}`]);
 VIEWS.settings = function () {
   const st = S.settings, d = st.defaults;
   const sel = (path, opts, val) => `<select id="set-${path}" data-set="${path}">${opts.map(o => { const [a, b] = Array.isArray(o) ? o : [o, o]; return `<option value="${esc(a)}"${String(a) === String(val) ? ' selected' : ''}>${esc(b)}</option>`; }).join('')}</select>`;
@@ -1935,14 +2105,14 @@ VIEWS.settings = function () {
   return `<div class="page-head"><h1>Settings</h1><p>Your profile, units and display, and the defaults new projects start with. Settings are private to you.</p></div>
   <div class="grid2">
     <section class="box"><header><h2>User details</h2></header><div class="bd">
-      <div class="row"><img src="${esc(S.me.avatarUrl || '')}" alt="" style="width:40px;height:40px;border-radius:50%;background:var(--raise)"><div><b>${esc(S.me.name || 'Signed in')}</b><div class="faint" style="font-size:12px">${S.mode === 'claude' ? 'Signed in with your Claude account' : S.mode === 'firebase' ? 'Signed in as ' + esc(S.me.email || '') : 'Working offline in this browser'}</div></div></div>
+      <div class="row">${S.me.avatarUrl ? `<img src="${esc(S.me.avatarUrl)}" alt="" style="width:40px;height:40px;border-radius:50%;background:var(--raise)">` : LOGO(40)}<div><b>${esc(S.me.name || 'Signed in')}</b><div class="faint" style="font-size:12px">${S.mode === 'claude' ? 'Signed in with your Claude account' : S.mode === 'firebase' ? 'Signed in as ' + esc(S.me.email || '') : 'Working offline in this browser'}</div></div></div>
       <div class="fields">${F('Display name on reports', inp('displayName', st.displayName))}${F('Title', sel('title', ['', 'Engr.', 'Arch.', 'Mr.', 'Ms.', 'Dr.'], st.title))}${F('Position', inp('position', st.position))}${F('Company', inp('company', st.company))}${F('PRC / licence no.', inp('license', st.license))}${F('Phone', inp('phone', st.phone))}</div>
       ${S.mode === 'firebase' ? `<div class="row"><button class="btn" data-act="pwReset">Email me a password reset link</button><button class="btn" data-act="lock">Sign out</button></div>` : `<div class="msg"><b>Reset username and password.</b> ${S.mode === 'claude' ? 'This copy signs you in with your Claude account, so there is no separate password to reset. Change your name or email in your Claude account settings at claude.ai.' : 'This copy runs offline without a login. Connect the Firebase database (see README) for email and password sign-in.'}</div>`}
     </div></section>
     <section class="box"><header><h2>Unit settings</h2></header><div class="bd"><div class="fields">
       ${F('Unit system', sel('units', ['Metric', 'Imperial'], st.units))}${F('Currency label', sel('currency', [['PHP', 'PHP ₱'], ['BND', 'BND B$'], ['USD', 'USD $']], st.currency))}
       ${F('₱ per 1 BND', inp('rates.BND', st.rates?.BND, 1))}${F('₱ per 1 USD', inp('rates.USD', st.rates?.USD, 1))}
-      ${F('Date format', sel('dateFmt', ['MMM D, YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'], st.dateFmt))}${F('Time zone', sel('tz', TZS, st.tz))}
+      ${F('Date format', sel('dateFmt', ['MMM D, YYYY', 'DD/MM/YYYY', 'YYYY-MM-DD'], st.dateFmt))}${F('Time zone', sel('tz', tzOptions(), st.tz))}
       ${F('Clock', sel('clock24', [['false', '12-hour'], ['true', '24-hour']], String(!!st.clock24)))}${F('Display', sel('theme', [['auto', 'Auto (follow device)'], ['day', 'Day'], ['night', 'Night']], st.theme))}
     </div><p class="faint" style="margin:0;font-size:12px">The currency setting changes the symbol shown on amounts; it does not convert stored figures. Exchange rates feed the currency converter and quick estimates.</p></div></section>
     <section class="box"><header><h2>Project defaults</h2></header><div class="bd"><div class="fields">
@@ -2009,10 +2179,23 @@ function tickClock() {
     tShort = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: !S.settings.clock24 }).format(now);
     d = new Intl.DateTimeFormat('en-US', { timeZone: tz, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(now);
   } catch (e) { }
-  $$('.clock').forEach(el => { el.querySelector('.t').textContent = t; el.querySelector('.d').textContent = d; el.querySelector('.z').textContent = tz || ''; });
+  $$('.clock').forEach(el => { el.querySelector('.t').textContent = t; el.querySelector('.d').textContent = d; el.querySelector('.z').textContent = `${tzOffset(tz)} · ${(tz || '').replace(/_/g, ' ')}`; });
   const mc = $('#mclock'); if (mc) mc.textContent = tShort;
 }
 setInterval(tickClock, 1000);
+
+/* ================= brand, version, changelog ================= */
+const LOGO = (px, title = 'DARKWIZ CT') => `<svg class="logo-mark" width="${px}" height="${px}" viewBox="0 0 64 64" role="img" aria-label="${title}"><rect width="64" height="64" rx="14" fill="#3B2BB8"/><g fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><path d="M9 47 L32 20 L55 47 Z"/><path d="M32 20 V47 M32 47 L20.5 33.5 M32 47 L43.5 33.5"/></g><path d="M32 4.5 L34.2 10.3 L40 12.5 L34.2 14.7 L32 20.5 L29.8 14.7 L24 12.5 L29.8 10.3 Z" fill="#22D3EE"/><rect x="7" y="51" width="50" height="3.5" rx="1.75" fill="#22D3EE" opacity=".9"/></svg>`;
+const verText = () => `v${APP.version}`;
+function changelogUrl() { if (S.mode === 'claude') return APP.publicChangelogClaude || ''; if (location.protocol.startsWith('http')) return 'changelog.html'; return ''; }
+const SITE = () => `<a href="${APP.site}" target="_blank" rel="noopener">${APP.site.replace(/^https?:\/\//, '')}</a>`;
+ACT.changelog = (el, e) => {
+  e?.preventDefault?.();
+  const url = changelogUrl();
+  openModal({ title: `${APP.fullName} — changelog`, noSave: true, wide: true, sheet: true,
+    extra: url ? `<a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Open shareable changelog ↗</a>` : '',
+    body: `<p class="muted" style="margin:0;font-size:13px">You're on <b>${verText()}</b> (build ${esc(APP.build)}, ${fdate(APP.date)}).</p>` + APP.releases.map(r => `<section class="cl"><h4><span class="chip acc">v${esc(r.version)}</span> ${esc(r.title)} <span class="faint num" style="font-size:12px;font-weight:400">${fdate(r.date)}</span></h4><ul>${r.changes.map(c => `<li>${esc(c)}</li>`).join('')}</ul></section>`).join('') });
+};
 
 /* ================= sign-in gate ================= */
 function renderGate(state) {
@@ -2033,11 +2216,14 @@ function renderGate(state) {
     ${S.bootMsg ? `<div class="msg warn" style="text-align:left">${esc(S.bootMsg)}</div>` : ''}
     <button class="btn pri" id="loginbtn" style="justify-content:center;padding:10px">${S.mode === 'firebase' ? 'Continue' : 'Login'}</button>
     ${S.mode === 'firebase' ? '<button class="btn" id="signoutbtn" style="justify-content:center">Sign in as someone else</button>' : '<button class="btn" id="resetbtn" style="justify-content:center">Reset username / password</button>'}`;
+  const verLine = `<div class="ver"><span class="num">${verText()}</span> · ${fdate(APP.date)} · <a href="#" data-act="changelog">Changelog</a></div>`;
   app.innerHTML = `<div class="gate"><div class="gate-card">
+    <div class="gate-logo">${LOGO(72)}</div>
     <div class="logo">DARKWIZ <span>CT</span></div>
     <div class="muted" style="font-size:13.5px;margin-top:-12px;letter-spacing:.04em">Construction Toolkit</div>
     ${body}
-  </div></div>`;
+    ${state === 'connecting' ? '' : verLine}
+  </div><div class="gate-foot">A DARKWIZ Lab app · ${SITE()}</div></div>`;
   const msg = t => { const m = $('#si-msg'); if (m) { m.hidden = !t; m.textContent = t || ''; m.className = 'msg ' + (/sent/i.test(t) ? '' : 'bad'); } };
   if (state === 'signin') {
     $('#signin').addEventListener('submit', async e => {
@@ -2085,15 +2271,17 @@ const ico = k => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" st
 const RAIL = [['refs', 'References', 'NSCP, AISC, ACI, ASTM, Brunei EC…'], ['library', 'Material, Labour, Equipment Database', ''], ['procurement', 'Procurement Database', ''], ['settings', 'Settings', '']];
 function buildShell() {
   $('#app').innerHTML = `<header class="top"><div class="top-in">
-    <div class="brand">DARKWIZ <span>CT</span></div>
+    <div class="brand">${LOGO(28)}<span class="bt">DARKWIZ <span>CT</span></span></div>
     <nav class="nav" aria-label="Main">${[['dashboard', 'Dashboard / Home'], ['new', 'Create a new project'], ['open', 'Open existing project'], ['tools', 'Quick tools']].map(([k, l]) => `<button data-act="go" data-page="${k}" data-go="${k}">${l}</button>`).join('')}</nav>
-    <div class="me"><span id="mclock" class="mclock num"></span><span class="mode ${S.mode === 'local' ? 'local' : 'cloud'}" title="${S.mode === 'local' ? 'Data is saved in this browser only' : 'Data is saved to the cloud database'}">${S.mode === 'local' ? 'Offline' : 'Cloud'}</span><img src="${esc(S.me.avatarUrl || '')}" alt="" ${S.me.avatarUrl ? '' : 'hidden'}><span class="nm">${esc(S.settings.displayName || S.me.name || '')}</span></div>
+    <div class="me"><span id="mclock" class="mclock num"></span><span class="mode ${S.mode === 'local' ? 'local' : 'cloud'}" title="${S.mode === 'local' ? 'Data is saved in this browser only' : 'Data is saved to the cloud database'}">${S.mode === 'local' ? 'Offline' : 'Cloud'}</span><img src="${esc(S.me.avatarUrl || '')}" alt="" ${S.me.avatarUrl ? '' : 'hidden'}><span class="nm">${esc(S.me.email || S.settings.displayName || S.me.name || '')}</span><button class="verchip" data-act="changelog" title="What's new in this version">${verText()}</button></div>
   </div></header>
   <div class="shell"><main id="main"></main>
     <aside class="rail" aria-label="Tools">
       <div class="clock" role="timer" aria-live="off"><div class="t">--:--</div><div class="d"></div><div class="z"></div></div>
       ${RAIL.map(([k, l, s]) => `<button class="rbtn" data-act="go" data-page="${k}" data-go="${k}">${l}${s ? `<span class="faint" style="font-weight:400;font-size:11.5px;display:block">${s}</span>` : ''}</button>`).join('')}
-    </aside></div>
+    </aside>
+    <footer class="appfoot"><span>${APP.fullName} <button class="linkbtn num" data-act="changelog">${verText()}</button> · <button class="linkbtn" data-act="changelog">Changelog</button></span><span>A DARKWIZ Lab app · ${SITE()}</span></footer>
+  </div>
   <nav class="bnav" aria-label="Main">${[['dashboard', 'home', 'Home'], ['new', 'new', 'New'], ['open', 'open', 'Projects'], ['tools', 'tools', 'Tools']].map(([k, i, l]) => `<button data-act="go" data-page="${k}" data-go="${k}">${ico(i)}<span>${l}</span></button>`).join('')}<button data-act="moreSheet" data-go="more">${ico('more')}<span>More</span></button></nav>`;
   tickClock();
 }
@@ -2148,6 +2336,7 @@ function uiInput(el, live) {
   if (d.qe) { S.ui.qe[d.qe] = val; scheduleRender(true); return true; }
   if (d.cu) { S.ui.cu[d.cu] = val; scheduleRender(true); return true; }
   if (d.co) { S.ui.co[d.co] = val; scheduleRender(true); return true; }
+  if (d.rn) { onRnChange(el); return true; }
   if (d.gopt) { S.ui.gantt[d.gopt] = el.type === 'checkbox' ? el.checked : num(el.value); scheduleRender(true); return true; }
   return false;
 }
