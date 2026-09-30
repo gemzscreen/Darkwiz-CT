@@ -1,0 +1,22 @@
+rules_version = '2';
+// DARKWIZ CT security rules. Paste into Firebase console → Firestore Database → Rules → Publish.
+// Put the email of every person allowed to use the app in TEAM (the accounts you create under Authentication → Users).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isTeam() {
+      return request.auth != null
+        && request.auth.token.email in [
+          'you@example.com'
+          // , 'teammate@example.com'
+        ];
+    }
+    // Private per person: settings, to-dos, notes
+    match /data/users/{uid}/{rest=**} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+    // Shared team data: projects, sheets, database lists, procurement, calendar, quotations
+    match /{col}/{rest=**} {
+      allow read, write: if col != 'data' && isTeam();
+    }
+  }
+}
