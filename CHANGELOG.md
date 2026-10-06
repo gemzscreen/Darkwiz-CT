@@ -1,5 +1,14 @@
 # DARKWIZ Construction Toolkit — changelog
 
+## v1.3.0 — Full-width layout, better to-dos and notes, custom estimate rates (2026-10-06)
+- Changed: the app now fills wide screens instead of stopping at a fixed width, with slightly larger text on big monitors.
+- Changed: on the dashboard, To do tasks sit under the calendar and Personal notes get their own full-width row.
+- New: To do tasks have a larger input, Critical / Mid / Low priority, due dates, project tags and details. Filter by priority, status, due date and project, search, and sort.
+- New: Personal notes can have a due date, a project and a pin. Notes show when they were created and updated, can be searched and filtered, and due notes appear on the calendar.
+- New: an At a glance panel under the side menu shows overdue, due-today and critical tasks and what is coming up.
+- Fixed: in Conversion tools the From and To values no longer spill out of their boxes. A swap button switches the units.
+- New: Quick estimate rates are editable. Type any rate per m² (for example 20,000), adjust the low and high range, and save a range as your default for each building type. You can also say whether the rate includes VAT.
+
 ## v1.2.0 — Versioning, new logo and reference notes (2026-09-30)
 - New: version number under the Login button and next to your account in the top bar, with a link to this changelog.
 - New: DARKWIZ CT logo (roof truss with a spark) on the login page, top bar and browser tab.

@@ -1,5 +1,5 @@
 /* DARKWIZ CT service worker: app shell works offline; always tries the network first for the app itself. */
-const CACHE = 'dwct-1.2.0-84b81db';
+const CACHE = 'dwct-1.3.0-da307d0';
 const SHELL = ['./', './index.html', './firebase-config.js', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 const CDN = ['www.gstatic.com', 'cdnjs.cloudflare.com', 'fonts.googleapis.com', 'fonts.gstatic.com'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });

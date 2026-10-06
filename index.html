@@ -13,7 +13,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DARKWIZ CT">
-<meta name="app-version" content="1.2.0+84b81db">
+<meta name="app-version" content="1.3.0+da307d0">
 <title>DARKWIZ Construction Toolkit</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@ img{max-width:100%}
   --clock:#3B2BB8; --clock-ink:#FFFFFF;
   --shadow:0 1px 2px rgba(20,23,51,.06),0 4px 16px rgba(20,23,51,.05);
   --display:"Space Grotesk","Segoe UI",system-ui,sans-serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
-  --r:10px;
+  --r:10px; --gut:clamp(12px,1.5vw,32px); --railw:clamp(206px,12.5vw,268px); --gap:clamp(12px,.9vw,20px);
 }
 :root.night{
   color-scheme:dark;
@@ -68,7 +68,7 @@ h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
 
 /* ---------- shell ---------- */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.top-in{max-width:1560px;margin:0 auto;display:flex;align-items:center;gap:14px;padding-block:10px;padding-inline:20px}
+.top-in{max-width:2560px;margin:0 auto;display:flex;align-items:center;gap:14px;padding-block:10px;padding-inline:var(--gut)}
 .brand{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:.05em;white-space:nowrap}
 .brand span{color:var(--accent)}
 .nav{display:flex;gap:6px;flex-wrap:wrap}
@@ -82,12 +82,12 @@ h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
 .mode{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--rule-strong)}
 .mode.cloud{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
 .mode.local{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,transparent)}
-.shell{max-width:1560px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 236px;gap:18px;padding-block:18px 48px;padding-inline:20px}
+.shell{max-width:2560px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) var(--railw);gap:var(--gap);padding-block:16px 40px;padding-inline:var(--gut)}
 main{min-width:0}
 .rail{display:grid;gap:10px;align-content:start;position:sticky;top:74px}
 .rail .rbtn{text-align:center;padding:10px 12px;font-weight:600}
 .clock{background:var(--clock);color:var(--clock-ink);border-radius:var(--r);padding:14px 16px;text-align:center}
-.clock .t{font-family:var(--display);font-weight:700;font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}
+.clock .t{font-family:var(--display);font-weight:700;font-size:clamp(20px,1.55vw,30px);white-space:nowrap;line-height:1.1;font-variant-numeric:tabular-nums}
 .clock .d{font-size:13px;opacity:.85}
 .clock .z{font-family:var(--mono);font-size:10.5px;opacity:.65;margin-top:4px}
 
@@ -96,9 +96,10 @@ main{min-width:0}
 .page-head h1{font-size:24px;line-height:1.2}
 .page-head p{margin:0;color:var(--muted);flex:0 0 100%;max-width:none;text-wrap:pretty}
 .page-head .spacer{flex:1}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.dash{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;align-items:start}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.dash{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-areas:"rep side" "notes notes";gap:var(--gap);align-items:start}
+.dash>.rep{grid-area:rep}.dash>.side{grid-area:side;display:grid;gap:var(--gap);min-width:0}.dash>.notesbox{grid-area:notes}
 .box{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}
 .box>header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
 .box>header h2{font-size:15px;font-weight:600}
@@ -213,16 +214,62 @@ select.search{padding:5px 8px}
 .ev{display:flex;gap:8px;align-items:baseline;font-size:12.5px;padding:3px 0;border-bottom:1px dotted var(--rule)}
 .ev .dt{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
 .ev .tt{flex:1;min-width:0}
-.todo{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px dotted var(--rule);font-size:13px}
-.todo input[type=checkbox]{accent-color:var(--accent);margin-top:3px}
-.todo.done .tx{text-decoration:line-through;color:var(--faint)}
-.todo .tx{flex:1;min-width:0;overflow-wrap:anywhere}
-.todo .due{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
-.todo .due.late{color:var(--bad)}
-.note{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--sunk);cursor:pointer;display:grid;gap:2px}
+.todobox .bd{gap:12px}
+.tadd{display:grid;gap:8px;padding:10px;border:1px solid var(--rule);border-radius:10px;background:var(--sunk)}
+.tin{width:100%;min-width:0;font-size:15.5px;line-height:1.4;padding:11px 13px;border:1px solid var(--rule-strong);border-radius:8px;background:var(--surface)}
+.tin:focus,.cv-val:focus,.qe-rate input.big:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+.tadd-opts{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
+.lf{display:grid;gap:3px;min-width:0;flex:0 1 auto}
+.lf>span{font-size:11.5px;color:var(--muted)}
+.lf.grow{flex:1 1 160px}
+.lf .search{width:100%;height:38px;padding-block:0}
+.tadd-opts .btn{height:38px}
+.tfil{display:grid;gap:8px}
+.tfil-row{display:flex;flex-wrap:wrap;gap:8px}
+.tfil-row>input{flex:2 1 180px;min-width:0}
+.tfil-row>select{flex:1 1 140px;min-width:0}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px}
+.seg button{border:1px solid var(--rule-strong);background:var(--surface);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer;white-space:nowrap;color:var(--muted)}
+.seg button small{font-family:var(--mono);font-size:10.5px;opacity:.8;margin-left:2px}
+.seg button:hover{border-color:var(--accent);color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg.wide{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr))}
+.seg.wide button{border-radius:8px;padding:7px 8px}
+.tlist{display:grid;gap:6px;max-height:min(560px,62vh);overflow:auto;padding-right:2px}
+.todo{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;padding:9px 10px;border:1px solid var(--rule);border-left:4px solid var(--warn);border-radius:8px;background:var(--surface)}
+.todo.p-critical{border-left-color:var(--bad);background:color-mix(in srgb,var(--bad-soft) 45%,var(--surface))}
+.todo.p-low{border-left-color:var(--ok)}
+.todo input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;margin:2px 0 0}
+.todo .tt{font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.todo .tn{font-size:12.5px;color:var(--muted);white-space:pre-line;margin-top:2px;overflow-wrap:anywhere}
+.todo .meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.todo .pbtn{border:0;cursor:pointer}
+.todo .ta{display:flex;gap:2px}
+.todo.done{opacity:.7;border-left-color:var(--rule-strong);background:var(--sunk)}
+.todo.done .tt{text-decoration:line-through;color:var(--faint)}
+.notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px;max-height:min(720px,80vh);overflow:auto;padding:2px}
+.note{border:1px solid var(--rule);border-radius:10px;padding:10px 12px;background:var(--sunk);cursor:pointer;display:grid;gap:6px;align-content:start;min-width:0}
 .note:hover{border-color:var(--accent)}
-.note b{font-size:13px}
-.note p{margin:0;font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.note.pinned{border-color:color-mix(in srgb,var(--accent) 45%,var(--rule));background:var(--accent-soft)}
+.note.late{box-shadow:inset 3px 0 var(--bad)}
+.note>header{display:flex;gap:6px;align-items:start}
+.note>header b{flex:1;min-width:0;font-size:14px;font-family:var(--display);overflow-wrap:anywhere}
+.note .pin{border:0;background:none;padding:2px;color:var(--faint);cursor:pointer;border-radius:4px;line-height:0}
+.note .pin[aria-pressed="true"]{color:var(--accent)}
+.note .pin:hover{color:var(--accent)}
+.note p{margin:0;font-size:13px;color:var(--muted);white-space:pre-line;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.note footer{display:flex;flex-wrap:wrap;gap:5px;align-items:center;font-size:11px}
+.note .stamp{font-size:10.5px;margin-left:auto}
+/* rail glance */
+.glance{border:1px solid var(--rule);border-radius:var(--r);background:var(--surface);padding:10px 12px;display:grid;gap:3px;box-shadow:var(--shadow)}
+.glance:empty{display:none}
+.glance button{display:flex;justify-content:space-between;align-items:center;gap:8px;border:0;background:none;padding:5px 4px;border-radius:6px;cursor:pointer;font-size:12.5px;color:var(--ink);text-align:left}
+.glance button:hover{background:var(--raise)}
+.glance button b{font-family:var(--mono);font-size:12px;min-width:22px;text-align:center;border-radius:999px;padding:0 6px;background:var(--raise);color:var(--muted)}
+.glance b.bad{background:var(--bad-soft);color:var(--bad)} .glance b.warn{background:var(--warn-soft);color:var(--warn)} .glance b.cy{background:var(--cyan-soft);color:var(--cyan)}
+.gl-it{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;font-size:12px;padding:2px 4px}
+.gl-it .num{font-size:11px;color:var(--muted)}
+.gl-it span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .kcol{background:var(--sunk);border:1px solid var(--rule);border-radius:8px;padding:8px;display:grid;gap:6px;align-content:start;min-height:120px}
 .kcol h4{margin:0;font-family:var(--display);font-size:12.5px;display:flex;justify-content:space-between}
@@ -235,10 +282,26 @@ select.search{padding:5px 8px}
 .pcard b{font-family:var(--display);font-size:15px}
 .pcard .meta{font-size:12px;color:var(--muted)}
 .overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.conv{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:end}
-.conv .row>input,.conv .row>output{min-width:80px}
-.conv .row>select{flex:0 1 auto;max-width:55%}
-.conv .eq{padding-bottom:8px;color:var(--faint);font-family:var(--mono)}
+.convbd{container-type:inline-size}
+.conv{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:end}
+.conv .eq{padding-bottom:10px;color:var(--faint);font-family:var(--mono)}
+.cv-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(86px,40%);gap:6px;align-items:stretch;min-width:0}
+.cv-row>select{width:100%;min-width:0;max-width:none!important}
+.cv-val{display:block;width:100%;min-width:0;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15px;padding:8px 10px;border:1px solid var(--rule-strong);background:var(--sunk);border-radius:7px;line-height:1.35}
+output.cv-val{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,var(--rule));font-weight:600;overflow-wrap:anywhere;word-break:break-all;min-height:100%}
+.cv-swap{align-self:end;border:1px solid var(--rule-strong);background:var(--surface);border-radius:999px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;color:var(--muted);transform:rotate(90deg);margin-bottom:2px}
+.cv-swap:hover{border-color:var(--accent);color:var(--accent)}
+.conv .kpi{min-width:0}
+@container (max-width:560px){
+  .conv{grid-template-columns:minmax(0,1fr)}
+  .conv .eq{display:none}
+  .cv-swap{justify-self:center;transform:none;margin:0}
+}
+.qe-rate{display:grid;gap:8px;padding:12px;border:1px solid var(--rule);border-radius:10px;background:var(--sunk)}
+.qe-rate .fields{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.qe-rate input{background:var(--surface)!important}
+.qe-rate input.big{font-size:17px;font-weight:600;padding:8px 10px}
+.qe-rate .f.chk{padding-top:16px}
 .refcard{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;display:grid;gap:6px;background:var(--sunk)}
 .refcard h4{margin:0;font-family:var(--display);font-size:13.5px}
 .chkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
@@ -246,12 +309,21 @@ select.search{padding:5px 8px}
 .chkgrid input{accent-color:var(--accent);margin-top:3px}
 .chkgrid small{display:block;color:var(--muted);font-size:11.5px}
 
-@media (max-width:1180px){.dash{grid-template-columns:minmax(0,1fr)}}
+@media (min-width:1700px){
+  body{font-size:15px}
+  .box>header h2{font-size:16px}
+  .t td{font-size:13.5px} .t th{font-size:12px}
+  .page-head h1{font-size:26px}
+  .nav button{font-size:14px;padding:8px 16px}
+  .kpi .v{font-size:22px}
+}
+@media (max-width:1180px){.dash{grid-template-columns:minmax(0,1fr);grid-template-areas:"rep" "side" "notes"}}
 @media (max-width:980px){
   .shell{grid-template-columns:minmax(0,1fr)}
   .rail{position:static;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));order:-1}
   .clock{grid-column:1/-1;display:flex;align-items:baseline;justify-content:center;gap:12px;padding:8px 12px}
   .clock .t{font-size:20px}
+  .glance{display:none}
   .overview,.grid2,.grid3{grid-template-columns:minmax(0,1fr)}
   .kanban{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -296,6 +368,7 @@ mark{background:color-mix(in srgb,var(--s2) 28%,transparent);color:inherit;borde
 /* ---------- mobile ---------- */
 #main select{max-width:100%}
 .row>select.search{min-width:0;flex:1 1 180px}
+.row>input,.row>output{min-width:0;max-width:100%}
 
 .bnav{display:none}
 .mclock{display:none}
@@ -329,6 +402,10 @@ mark{background:color-mix(in srgb,var(--s2) 28%,transparent);color:inherit;borde
   .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fields .f.full,.fields .f:has(textarea){grid-column:1/-1}
   .gantt-wrap{max-height:70vh}
+  .tin{font-size:16px!important}
+  .tadd-opts .lf{flex:1 1 130px}
+  .tadd-opts .btn{flex:1 1 100%;justify-content:center}
+  .todo .ta .btn{min-height:32px}
   .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 }
 @media (max-width:420px){ .fields{grid-template-columns:minmax(0,1fr)} }
@@ -347,7 +424,7 @@ mark{background:color-mix(in srgb,var(--s2) 28%,transparent);color:inherit;borde
 <div id="app"></div>
 <script src="firebase-config.js"></script>
 <script>
-const APP = {"version": "1.2.0", "date": "2026-09-30", "build": "84b81db", "app": "DARKWIZ CT", "fullName": "DARKWIZ Construction Toolkit", "site": "https://darkwizlab.com", "publicChangelogClaude": "https://claude.ai/artifact/3vL9REESJEGURGWxZALgp5", "releases": [{"version": "1.2.0", "date": "2026-09-30", "title": "Versioning, new logo and reference notes", "changes": ["New: version number under the Login button and next to your account in the top bar, with a link to this changelog.", "New: DARKWIZ CT logo (roof truss with a spark) on the login page, top bar and browser tab.", "New: footer link to darkwizlab.com.", "New: Reference notes library on the References page — search provisions, filter by code and topic, and keep your own notes.", "Changed: clause bookmarks are now part of Reference notes.", "Changed: time zones show their GMT offset, for example (GMT+8) Asia Manila, in Settings and on the clock."]}, {"version": "1.1.1", "date": "2026-09-30", "title": "Renamed to DARKWIZ CT", "changes": ["Changed: app renamed from DARKWIZ QS to DARKWIZ CT (Construction Toolkit). Backups made under the old name still import."]}, {"version": "1.1.0", "date": "2026-09-30", "title": "Own website, mobile layout and quick quotations", "changes": ["New: can be hosted on your own website with email and password login, password reset by email and an online database.", "New: phone layout with a bottom tab bar; installable on the home screen.", "New: Quick quotation in Quick tools with Excel (live formulas and cost breakdown) and PDF export.", "New: contract documents can store a link to the file."]}, {"version": "1.0.0", "date": "2026-09-30", "title": "First release", "changes": ["Dashboard with project-filtered reports, calendar, to-do list and personal notes.", "Create and open projects: PERT/CPM scheduling, Gantt chart, bill of quantities and materials, billing management, plan vs actual.", "Material, labour and equipment database with price history; procurement requests, suppliers and budgets.", "Quick tools: quick estimate and unit, strength, size, code and other conversions.", "References, and settings for units, display and project defaults."]}]};
+const APP = {"version": "1.3.0", "date": "2026-10-06", "build": "da307d0", "app": "DARKWIZ CT", "fullName": "DARKWIZ Construction Toolkit", "site": "https://darkwizlab.com", "publicChangelogClaude": "https://claude.ai/artifact/3vL9REESJEGURGWxZALgp5", "releases": [{"version": "1.3.0", "date": "2026-10-06", "title": "Full-width layout, better to-dos and notes, custom estimate rates", "changes": ["Changed: the app now fills wide screens instead of stopping at a fixed width, with slightly larger text on big monitors.", "Changed: on the dashboard, To do tasks sit under the calendar and Personal notes get their own full-width row.", "New: To do tasks have a larger input, Critical / Mid / Low priority, due dates, project tags and details. Filter by priority, status, due date and project, search, and sort.", "New: Personal notes can have a due date, a project and a pin. Notes show when they were created and updated, can be searched and filtered, and due notes appear on the calendar.", "New: an At a glance panel under the side menu shows overdue, due-today and critical tasks and what is coming up.", "Fixed: in Conversion tools the From and To values no longer spill out of their boxes. A swap button switches the units.", "New: Quick estimate rates are editable. Type any rate per m² (for example 20,000), adjust the low and high range, and save a range as your default for each building type. You can also say whether the rate includes VAT."]}, {"version": "1.2.0", "date": "2026-09-30", "title": "Versioning, new logo and reference notes", "changes": ["New: version number under the Login button and next to your account in the top bar, with a link to this changelog.", "New: DARKWIZ CT logo (roof truss with a spark) on the login page, top bar and browser tab.", "New: footer link to darkwizlab.com.", "New: Reference notes library on the References page — search provisions, filter by code and topic, and keep your own notes.", "Changed: clause bookmarks are now part of Reference notes.", "Changed: time zones show their GMT offset, for example (GMT+8) Asia Manila, in Settings and on the clock."]}, {"version": "1.1.1", "date": "2026-09-30", "title": "Renamed to DARKWIZ CT", "changes": ["Changed: app renamed from DARKWIZ QS to DARKWIZ CT (Construction Toolkit). Backups made under the old name still import."]}, {"version": "1.1.0", "date": "2026-09-30", "title": "Own website, mobile layout and quick quotations", "changes": ["New: can be hosted on your own website with email and password login, password reset by email and an online database.", "New: phone layout with a bottom tab bar; installable on the home screen.", "New: Quick quotation in Quick tools with Excel (live formulas and cost breakdown) and PDF export.", "New: contract documents can store a link to the file."]}, {"version": "1.0.0", "date": "2026-09-30", "title": "First release", "changes": ["Dashboard with project-filtered reports, calendar, to-do list and personal notes.", "Create and open projects: PERT/CPM scheduling, Gantt chart, bill of quantities and materials, billing management, plan vs actual.", "Material, labour and equipment database with price history; procurement requests, suppliers and budgets.", "Quick tools: quick estimate and unit, strength, size, code and other conversions.", "References, and settings for units, display and project defaults."]}]};
 'use strict';
 const VIEWS = {}; const ACT = {};
 /* ================= utilities ================= */
@@ -486,6 +563,7 @@ const AFTER = [];
 function renderChrome() {
   $$('.nav button').forEach(b => b.setAttribute('aria-current', S.route.page === b.dataset.go));
   $$('.rail .rbtn').forEach(b => b.setAttribute('aria-current', S.route.page === b.dataset.go));
+  const g = $('#glance'); if (g && typeof glanceHTML === 'function') { const h = glanceHTML(); if (g._h !== h) { g.innerHTML = h; g._h = h; } }
   $$('.bnav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === 'more' ? ['refs', 'library', 'procurement', 'settings'].includes(S.route.page) : S.route.page === b.dataset.go));
 }
 function go(page, a = '', b = '') {
@@ -1420,12 +1498,13 @@ VIEWS.dashboard = function () {
   const nm = (S.settings.displayName || S.me.name || '').trim().split(' ')[0]; const greet = nm ? (S.settings.title ? S.settings.title + ' ' : '') + nm : '';
   return `<div class="page-head"><div><div class="eyebrow">${esc(new Date().getHours() < 12 ? 'Good morning' : new Date().getHours() < 18 ? 'Good afternoon' : 'Good evening')}${greet.trim() ? ', ' + esc(greet.trim()) : ''}</div><h1>Dashboard</h1></div></div>
   <div class="dash">
-    <section class="box"><header><h2>Reports & summaries</h2><span class="sp"></span><label for="dashp" class="muted" style="font-size:12.5px">Project</label><select id="dashp" class="search" data-set="dashProject">${opts}</select>${proj ? `<button class="btn sm" data-act="go" data-page="open" data-a="${proj.id}" data-b="overview">Open project</button>` : `<button class="btn sm" data-act="refreshAll" title="Reload every project's BOQ and schedule and recompute figures with current prices">Refresh figures</button>`}</header>
+    <section class="box rep"><header><h2>Reports & summaries</h2><span class="sp"></span><label for="dashp" class="muted" style="font-size:12.5px">Project</label><select id="dashp" class="search" data-set="dashProject">${opts}</select>${proj ? `<button class="btn sm" data-act="go" data-page="open" data-a="${proj.id}" data-b="overview">Open project</button>` : `<button class="btn sm" data-act="refreshAll" title="Reload every project's BOQ and schedule and recompute figures with current prices">Refresh figures</button>`}</header>
       <div class="bd">${!S.loaded.projects ? '<div class="empty">Loading…</div>' : proj ? dashOne(proj) : dashAll()}</div></section>
-    <div style="display:grid;gap:14px;min-width:0">
+    <div class="side">
       ${calendarBox()}
-      <div class="grid2">${todoBox()}${notesBox()}</div>
+      ${todoBox()}
     </div>
+    ${notesBox()}
   </div>`;
 };
 function dashAll() {
@@ -1502,7 +1581,8 @@ function calEvents() {
     (x.bills || []).forEach(b => b.d && ev.push({ d: b.d, t: `${p.name} — billing ${b.no || ''} (${b.s})`, k: 'r', type: 'Report', pid: p.id }));
   });
   S.orders.filter(o => o.needBy && o.status !== 'Completed').forEach(o => ev.push({ d: o.needBy, t: `Needed on site: ${o.desc} (${o.no})`, k: 'd', type: 'Due date', pid: o.projectId }));
-  S.todos.filter(t => t.due && !t.done).forEach(t => ev.push({ d: t.due, t: `To do: ${t.text}`, k: 'd', type: 'To do' }));
+  S.todos.filter(t => t.due && !t.done).forEach(t => ev.push({ d: t.due, t: `To do${tPri(t) === 'critical' ? ' (critical)' : ''}: ${t.text}`, k: 'd', type: 'To do', pid: t.projectId || undefined }));
+  S.notes.filter(n => n.due).forEach(n => ev.push({ d: n.due, t: `Note: ${n.title || 'Untitled'}`, k: 'd', type: 'Note', pid: n.projectId || undefined }));
   const f = S.settings.dashProject;
   return f && f !== 'all' ? ev.filter(e => !e.pid || e.pid === f || e.k === 'h') : ev;
 }
@@ -1539,36 +1619,174 @@ ACT.editEvent = el => {
     onSave: async root => { const v = readFields(spec, root); if (!await saveItem('events', { ...e, ...v, id })) return false; toast('Event saved.'); } });
 };
 
+
 /* ================= To do & notes (private to you) ================= */
+const PRI = { critical: { l: 'Critical', c: 'bad', w: 0 }, mid: { l: 'Mid', c: 'warn', w: 1 }, low: { l: 'Low', c: 'ok', w: 2 } };
+const tPri = t => PRI[t.priority] ? t.priority : 'mid';
+const dayDiff = (a, b) => Math.round((dOf(b) - dOf(a)) / 864e5);
+function dueInfo(d, done) {
+  if (!d) return null;
+  const n = dayDiff(todayISO(), d), yr = d.slice(0, 4) !== todayISO().slice(0, 4) ? ', ' + d.slice(0, 4) : '';
+  if (done) return { n, txt: fshort(d) + yr, cls: '' };
+  if (n < 0) return { n, txt: `Overdue ${-n}d · ${fshort(d)}`, cls: 'bad', late: true };
+  if (n === 0) return { n, txt: 'Due today', cls: 'warn' };
+  if (n === 1) return { n, txt: 'Tomorrow', cls: 'warn' };
+  if (n <= 7) return { n, txt: `In ${n} days · ${fshort(d)}`, cls: 'cy' };
+  return { n, txt: fshort(d) + yr, cls: '' };
+}
+const dueChip = (d, done, pre = '') => {
+  const x = dueInfo(d, done); if (!x) return '';
+  const txt = !pre ? x.txt : x.late ? x.txt.replace('Overdue', 'Past due') : x.txt.startsWith('Due') ? x.txt : pre + x.txt[0].toLowerCase() + x.txt.slice(1);
+  return `<span class="chip ${x.cls}" title="Due ${esc(fdate(d))}">${txt}</span>`;
+};
+const projChip = pid => { const p = pid && projectOf(pid); return p ? `<span class="chip acc" title="Project">${esc(p.name)}</span>` : ''; };
+const projOpts = (sel, all) => (all ? `<option value="all">All projects</option><option value="none"${sel === 'none' ? ' selected' : ''}>No project</option>` : `<option value="">No project</option>`) + S.projects.slice().sort((a, b) => String(a.name).localeCompare(b.name)).map(p => `<option value="${p.id}"${p.id === sel ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
+const segBtns = (k, opts) => `<div class="seg" role="group">${opts.map(([v, l, n]) => `<button type="button" data-act="uiSet" data-k="${k}" data-v="${v}" aria-pressed="${String((S.ui[k] ?? opts[0][0]) === v)}">${l}${n != null ? ` <small>${n}</small>` : ''}</button>`).join('')}</div>`;
+ACT.uiSet = el => { S.ui[el.dataset.k] = el.dataset.v; scheduleRender(true); };
+
+function todoFiltered() {
+  const u = S.ui, t0 = todayISO(), q = String(u.tdQ || '').trim().toLowerCase();
+  const st = u.tdSt || 'open', pri = u.tdPri || 'all', due = u.tdDue || 'any', pj = u.tdProj || 'all', sort = u.tdSort || 'due';
+  let a = S.todos.filter(t => st === 'all' || (st === 'done' ? t.done : !t.done));
+  if (pri !== 'all') a = a.filter(t => tPri(t) === pri);
+  if (due === 'overdue') a = a.filter(t => t.due && t.due < t0 && !t.done);
+  else if (due === 'today') a = a.filter(t => t.due === t0);
+  else if (due === 'week') a = a.filter(t => t.due && t.due >= t0 && t.due <= addDays(t0, 7));
+  else if (due === 'none') a = a.filter(t => !t.due);
+  if (pj === 'none') a = a.filter(t => !t.projectId); else if (pj !== 'all') a = a.filter(t => t.projectId === pj);
+  if (q) a = a.filter(t => (t.text + ' ' + (t.notes || '') + ' ' + (projectOf(t.projectId)?.name || '')).toLowerCase().includes(q));
+  const byDue = (x, y) => String(x.due || '9999').localeCompare(String(y.due || '9999'));
+  const byPri = (x, y) => PRI[tPri(x)].w - PRI[tPri(y)].w;
+  const cmp = sort === 'pri' ? (x, y) => byPri(x, y) || byDue(x, y) : sort === 'new' ? (x, y) => String(y.created || '').localeCompare(String(x.created || '')) : (x, y) => byDue(x, y) || byPri(x, y);
+  return a.sort((x, y) => (x.done - y.done) || cmp(x, y));
+}
 function todoBox() {
-  const show = S.ui.todoAll;
-  const items = S.todos.slice().sort((a, b) => (a.done - b.done) || String(a.due || '9').localeCompare(String(b.due || '9')));
-  const vis = show ? items : items.filter(t => !t.done);
-  const t0 = todayISO();
-  return `<section class="box"><header><h2>To do tasks</h2><span class="sp"></span><span class="chip">${S.todos.filter(t => !t.done).length} open</span></header><div class="bd">
-    <div class="row"><input class="search" id="todonew" placeholder="Add a task, press Enter" style="flex:1;min-width:0" aria-label="New task"><input type="date" class="search" id="tododue" aria-label="Due date" style="width:138px"></div>
-    <div>${vis.length ? vis.map(t => `<div class="todo${t.done ? ' done' : ''}"><input type="checkbox" data-act="todoTog" data-id="${t.id}" ${t.done ? 'checked' : ''} aria-label="Done"><span class="tx">${esc(t.text)}</span>${t.due ? `<span class="due${!t.done && t.due < t0 ? ' late' : ''}">${fshort(t.due)}</span>` : ''}<button class="btn sm ghost" data-act="todoDel" data-id="${t.id}" aria-label="Delete task">×</button></div>`).join('') : '<div class="faint" style="font-size:12.5px">Nothing to do. Nice.</div>'}</div>
-    <button class="btn sm ghost" data-act="todoAll" style="justify-self:start">${show ? 'Hide completed' : 'Show completed'}</button>
+  const u = S.ui, t0 = todayISO();
+  const open = S.todos.filter(t => !t.done), late = open.filter(t => t.due && t.due < t0).length, crit = open.filter(t => tPri(t) === 'critical').length, doneN = S.todos.length - open.length;
+  const cnt = k => open.filter(t => tPri(t) === k).length;
+  const vis = todoFiltered();
+  const dPj = u.tdDraftProj ?? (S.settings.dashProject && S.settings.dashProject !== 'all' ? S.settings.dashProject : '');
+  const dPri = u.tdDraftPri || 'mid';
+  const filtered = (u.tdPri || 'all') !== 'all' || (u.tdSt || 'open') !== 'open' || (u.tdDue || 'any') !== 'any' || (u.tdProj || 'all') !== 'all' || (u.tdQ || '');
+  return `<section class="box todobox"><header><h2>To do tasks</h2><span class="sp"></span><span class="chip">${open.length} open</span>${late ? `<span class="chip bad">${late} overdue</span>` : ''}${crit ? `<span class="chip bad">${crit} critical</span>` : ''}</header><div class="bd">
+    <div class="tadd">
+      <input class="tin" id="todonew" data-draft="tdDraft" value="${esc(u.tdDraft || '')}" placeholder="Add a task — e.g. Call supplier about rebar delivery" aria-label="New task" autocomplete="off" enterkeyhint="done">
+      <div class="tadd-opts">
+        <label class="lf"><span>Due</span><input type="date" class="search" id="tododue" data-draft="tdDraftDue" value="${esc(u.tdDraftDue || '')}"></label>
+        <label class="lf"><span>Priority</span><select class="search" id="todopri" data-draft="tdDraftPri">${Object.entries(PRI).map(([k, v]) => `<option value="${k}"${k === dPri ? ' selected' : ''}>${v.l}</option>`).join('')}</select></label>
+        <label class="lf grow"><span>Project</span><select class="search" id="todoproj" data-draft="tdDraftProj">${projOpts(dPj)}</select></label>
+        <button class="btn pri" data-act="todoAdd">Add task</button>
+      </div>
+    </div>
+    <div class="tfil">
+      ${segBtns('tdPri', [['all', 'All'], ['critical', 'Critical', cnt('critical')], ['mid', 'Mid', cnt('mid')], ['low', 'Low', cnt('low')]])}
+      ${segBtns('tdSt', [['open', 'Open'], ['done', 'Done', doneN], ['all', 'All']])}
+      ${segBtns('tdDue', [['any', 'Any date'], ['overdue', 'Overdue'], ['today', 'Today'], ['week', 'Next 7 days'], ['none', 'No date']])}
+      <div class="tfil-row">
+        <input class="search" id="tdq" data-ui="tdQ" value="${esc(u.tdQ || '')}" placeholder="Search tasks" aria-label="Search tasks">
+        <select class="search" id="tdproj" data-ui="tdProj" aria-label="Filter by project">${projOpts(u.tdProj || 'all', true)}</select>
+        <select class="search" id="tdsort" data-ui="tdSort" aria-label="Sort tasks">${[['due', 'Sort: due date'], ['pri', 'Sort: priority'], ['new', 'Sort: newest']].map(([a, b]) => `<option value="${a}"${a === (u.tdSort || 'due') ? ' selected' : ''}>${b}</option>`).join('')}</select>
+      </div>
+    </div>
+    <div class="tlist" data-keep-scroll="todos">${vis.length ? vis.map(t => { const p = tPri(t); return `<div class="todo p-${p}${t.done ? ' done' : ''}">
+      <input type="checkbox" data-act="todoTog" data-id="${t.id}" ${t.done ? 'checked' : ''} aria-label="Mark done: ${esc(t.text)}">
+      <div class="tx"><div class="tt">${esc(t.text)}</div>${t.notes ? `<div class="tn">${esc(t.notes)}</div>` : ''}<div class="meta"><button class="chip ${PRI[p].c} pbtn" data-act="todoPri" data-id="${t.id}" title="Priority — click to change">${PRI[p].l}</button>${dueChip(t.due, t.done)}${projChip(t.projectId)}</div></div>
+      <div class="ta"><button class="btn sm ghost" data-act="todoEdit" data-id="${t.id}" aria-label="Edit task">Edit</button><button class="btn sm ghost danger" data-act="todoDel" data-id="${t.id}" aria-label="Delete task">×</button></div>
+    </div>`; }).join('') : `<div class="faint" style="font-size:13px;padding:6px 0">${S.todos.length ? (filtered ? 'No tasks match these filters.' : 'All done. Nice.') : 'No tasks yet. Add one above.'}</div>`}</div>
+    <div class="row" style="font-size:12px">${filtered ? `<span class="faint">Showing ${vis.length} of ${S.todos.length}</span><button class="btn sm ghost" data-act="todoReset">Clear filters</button>` : ''}<span style="flex:1"></span>${doneN ? `<button class="btn sm ghost" data-act="todoClear">Delete ${doneN} completed</button>` : ''}</div>
   </div></section>`;
 }
 function saveTodos() { if (S.privPath) queueSet(S.privPath('todos'), () => ({ items: S.todos }), 400); else localSave('todos', S.todos); }
 function saveNotes() { if (S.privPath) queueSet(S.privPath('notes'), () => ({ items: S.notes }), 400); else localSave('notes', S.notes); }
-ACT.todoAdd = () => { const i = $('#todonew'); const text = i.value.trim(); if (!text) return; S.todos.push({ id: uid('t'), text, due: $('#tododue').value || '', done: false, created: todayISO() }); i.value = ''; saveTodos(); scheduleRender(true); setTimeout(() => $('#todonew')?.focus(), 0); };
-ACT.todoTog = el => { const t = S.todos.find(x => x.id === el.dataset.id); if (t) { t.done = !t.done; saveTodos(); scheduleRender(true); } };
+ACT.todoAdd = () => {
+  const i = $('#todonew'); const text = (i?.value ?? S.ui.tdDraft ?? '').trim();
+  if (!text) { i?.focus(); return toast('Type the task first.'); }
+  const pri = $('#todopri')?.value || S.ui.tdDraftPri || 'mid', due = $('#tododue')?.value || '', pj = $('#todoproj')?.value || '';
+  S.todos.push({ id: uid('t'), text, due, priority: pri, projectId: pj, done: false, created: new Date().toISOString() });
+  S.ui.tdDraft = ''; S.ui.tdDraftDue = ''; S.ui.tdDraftPri = 'mid';
+  if (S.ui.tdSt === 'done') S.ui.tdSt = 'open';
+  saveTodos(); scheduleRender(true); setTimeout(() => $('#todonew')?.focus(), 0);
+};
+ACT.todoTog = el => { const t = S.todos.find(x => x.id === el.dataset.id); if (t) { t.done = !t.done; t.doneAt = t.done ? new Date().toISOString() : ''; saveTodos(); scheduleRender(true); } };
 ACT.todoDel = el => { S.todos = S.todos.filter(x => x.id !== el.dataset.id); saveTodos(); scheduleRender(true); };
-ACT.todoAll = () => { S.ui.todoAll = !S.ui.todoAll; scheduleRender(true); };
+ACT.todoPri = el => { const t = S.todos.find(x => x.id === el.dataset.id); if (!t) return; const ks = Object.keys(PRI); t.priority = ks[(ks.indexOf(tPri(t)) + 1) % ks.length]; saveTodos(); scheduleRender(true); };
+ACT.todoReset = () => { ['tdPri', 'tdSt', 'tdDue', 'tdProj', 'tdQ'].forEach(k => delete S.ui[k]); scheduleRender(true); };
+ACT.todoClear = () => { const n = S.todos.filter(t => t.done).length; confirmBox(`Delete ${n} completed task${n === 1 ? '' : 's'}? This can't be undone.`, () => { S.todos = S.todos.filter(t => !t.done); saveTodos(); scheduleRender(true); }); };
+ACT.todoEdit = el => {
+  const t = S.todos.find(x => x.id === el.dataset.id); if (!t) return;
+  const spec = [{ k: 'text', l: 'Task', req: true, full: true }, { k: 'due', l: 'Due date', t: 'date' }, { k: 'priority', l: 'Priority', t: 'select', o: Object.entries(PRI).map(([k, v]) => [k, v.l]) }, { k: 'projectId', l: 'Project', t: 'select', o: () => [['', '— none —'], ...S.projects.map(p => [p.id, p.name])] }, { k: 'done', l: 'Completed', t: 'checkbox' }, { k: 'notes', l: 'Details', t: 'textarea', ph: 'Optional — who to call, what to bring, references…' }];
+  openModal({ title: 'Edit task', body: fieldsHTML(spec, { ...t, priority: tPri(t) }) + `<p class="faint" style="margin:0;font-size:12px">Added ${fdate(String(t.created || '').slice(0, 10))}${t.done && t.doneAt ? ' · completed ' + fdate(t.doneAt.slice(0, 10)) : ''}</p>`,
+    onSave: root => { const v = readFields(spec, root); if (v.done && !t.done) v.doneAt = new Date().toISOString(); Object.assign(t, v); saveTodos(); scheduleRender(true); } });
+};
+
+function notesFiltered() {
+  const u = S.ui, t0 = todayISO(), q = String(u.nQ || '').trim().toLowerCase(), f = u.nF || 'all', pj = u.nProj || 'all', sort = u.nSort || 'updated';
+  let a = S.notes.slice();
+  if (f === 'pinned') a = a.filter(n => n.pinned);
+  else if (f === 'due') a = a.filter(n => n.due);
+  else if (f === 'overdue') a = a.filter(n => n.due && n.due < t0);
+  else if (f === 'week') a = a.filter(n => n.due && n.due >= t0 && n.due <= addDays(t0, 7));
+  if (pj === 'none') a = a.filter(n => !n.projectId); else if (pj !== 'all') a = a.filter(n => n.projectId === pj);
+  if (q) a = a.filter(n => ((n.title || '') + ' ' + (n.body || '') + ' ' + (projectOf(n.projectId)?.name || '')).toLowerCase().includes(q));
+  const cmp = sort === 'due' ? (x, y) => String(x.due || '9999').localeCompare(String(y.due || '9999')) || String(y.updated).localeCompare(x.updated)
+    : sort === 'created' ? (x, y) => String(y.created || y.updated || '').localeCompare(String(x.created || x.updated || ''))
+    : sort === 'title' ? (x, y) => String(x.title || '').localeCompare(String(y.title || ''))
+    : (x, y) => String(y.updated || '').localeCompare(String(x.updated || ''));
+  return a.sort((x, y) => (!!y.pinned - !!x.pinned) || cmp(x, y));
+}
 function notesBox() {
-  const ns = S.notes.slice().sort((a, b) => String(b.updated).localeCompare(a.updated));
-  return `<section class="box"><header><h2>Personal notes</h2><span class="sp"></span><button class="btn sm pri" data-act="editNote">+ Note</button></header><div class="bd">
-    ${ns.length ? `<div style="display:grid;gap:6px;max-height:300px;overflow:auto">${ns.map(n => `<div class="note" data-act="editNote" data-id="${n.id}" role="button" tabindex="0"><b>${esc(n.title || 'Untitled')}</b><p>${esc(n.body || '')}</p><span class="faint num" style="font-size:11px">${fdate((n.updated || '').slice(0, 10))}${n.projectId && projectOf(n.projectId) ? ' · ' + esc(projectOf(n.projectId).name) : ''}</span></div>`).join('')}</div>` : '<div class="faint" style="font-size:12.5px">Notes are private to you.</div>'}
+  const u = S.ui, t0 = todayISO(), ns = notesFiltered();
+  const late = S.notes.filter(n => n.due && n.due < t0).length, soon = S.notes.filter(n => n.due && n.due >= t0 && n.due <= addDays(t0, 7)).length;
+  const filtered = (u.nF || 'all') !== 'all' || (u.nProj || 'all') !== 'all' || (u.nQ || '');
+  return `<section class="box notesbox"><header><h2>Personal notes</h2><span class="chip">${S.notes.length}</span>${late ? `<span class="chip bad">${late} past due</span>` : ''}${soon ? `<span class="chip cy">${soon} due this week</span>` : ''}<span class="sp"></span><button class="btn sm pri" data-act="editNote">+ New note</button></header><div class="bd">
+    <div class="tfil">
+      ${segBtns('nF', [['all', 'All'], ['pinned', 'Pinned', S.notes.filter(n => n.pinned).length], ['due', 'With due date'], ['week', 'Due in 7 days', soon], ['overdue', 'Past due', late]])}
+      <div class="tfil-row">
+        <input class="search" id="nq" data-ui="nQ" value="${esc(u.nQ || '')}" placeholder="Search notes" aria-label="Search notes">
+        <select class="search" id="nproj" data-ui="nProj" aria-label="Filter notes by project">${projOpts(u.nProj || 'all', true)}</select>
+        <select class="search" id="nsort" data-ui="nSort" aria-label="Sort notes">${[['updated', 'Sort: last updated'], ['due', 'Sort: due date'], ['created', 'Sort: date created'], ['title', 'Sort: title']].map(([a, b]) => `<option value="${a}"${a === (u.nSort || 'updated') ? ' selected' : ''}>${b}</option>`).join('')}</select>
+      </div>
+    </div>
+    ${ns.length ? `<div class="notes" data-keep-scroll="notes">${ns.map(n => { const di = dueInfo(n.due, false); return `<article class="note${n.pinned ? ' pinned' : ''}${di?.late ? ' late' : ''}" data-act="editNote" data-id="${n.id}" role="button" tabindex="0" aria-label="Open note ${esc(n.title || 'Untitled')}">
+      <header><b>${esc(n.title || 'Untitled')}</b><button class="pin" data-act="notePin" data-id="${n.id}" aria-pressed="${!!n.pinned}" title="${n.pinned ? 'Unpin' : 'Pin to top'}" aria-label="${n.pinned ? 'Unpin note' : 'Pin note'}"><svg viewBox="0 0 24 24" width="15" height="15" fill="${n.pinned ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 3h6l-1 6 4 4H6l4-4z"/><path d="M12 13v8"/></svg></button></header>
+      ${n.body ? `<p>${esc(n.body)}</p>` : ''}
+      <footer>${n.due ? dueChip(n.due, false, 'Due ') : ''}${projChip(n.projectId)}<span class="faint num stamp">${n.created ? 'Created ' + fshort(n.created) + ' · ' : ''}Updated ${fdate(String(n.updated || '').slice(0, 10))}</span></footer>
+    </article>`; }).join('')}</div>` : `<div class="faint" style="font-size:13px">${S.notes.length ? (filtered ? 'No notes match these filters.' : '') : 'Notes are private to you. Give a note a due date and it shows on the calendar.'}</div>`}
+    ${filtered ? `<div class="row" style="font-size:12px"><span class="faint">Showing ${ns.length} of ${S.notes.length}</span><button class="btn sm ghost" data-act="noteReset">Clear filters</button></div>` : ''}
   </div></section>`;
 }
+ACT.noteReset = () => { ['nF', 'nProj', 'nQ'].forEach(k => delete S.ui[k]); scheduleRender(true); };
+ACT.notePin = el => { const n = S.notes.find(x => x.id === el.dataset.id); if (!n) return; n.pinned = !n.pinned; saveNotes(); scheduleRender(true); };
 ACT.editNote = el => {
-  const id = el.dataset.id, n = S.notes.find(x => x.id === id) || {};
-  const spec = [{ k: 'title', l: 'Title', full: true }, { k: 'projectId', l: 'Project', t: 'select', o: () => [['', '— none —'], ...S.projects.map(p => [p.id, p.name])] }, { k: 'body', l: 'Note', t: 'textarea' }];
-  openModal({ title: id ? 'Edit note' : 'New note', extra: id ? '<button class="btn danger" id="ndel">Delete</button>' : '', body: fieldsHTML(spec, n),
-    onOpen: root => { const ta = root.querySelector('textarea'); if (ta) ta.style.minHeight = '200px'; root.closest('.modal').querySelector('#ndel')?.addEventListener('click', () => { S.notes = S.notes.filter(x => x.id !== id); saveNotes(); closeModal(); scheduleRender(true); }); },
-    onSave: root => { const v = readFields(spec, root); if (id) Object.assign(n, v, { updated: new Date().toISOString() }); else S.notes.push({ id: uid('n'), ...v, updated: new Date().toISOString() }); saveNotes(); scheduleRender(true); } });
+  const id = el.dataset.id, n = S.notes.find(x => x.id === id) || { projectId: S.settings.dashProject && S.settings.dashProject !== 'all' ? S.settings.dashProject : '' };
+  const spec = [{ k: 'title', l: 'Title', full: true }, { k: 'due', l: 'Due date (optional)', t: 'date' }, { k: 'projectId', l: 'Project', t: 'select', o: () => [['', '— none —'], ...S.projects.map(p => [p.id, p.name])] }, { k: 'pinned', l: 'Pin to top', t: 'checkbox' }, { k: 'body', l: 'Note', t: 'textarea' }];
+  const stamp = id ? `<p class="faint num" style="margin:0;font-size:12px">${n.created ? 'Created ' + fdate(n.created.slice(0, 10)) + ' · ' : ''}Last updated ${fdate(String(n.updated || '').slice(0, 10))}</p>` : '';
+  const quick = `<div class="row" style="font-size:12px"><span class="faint">Due:</span>${[['Today', 0], ['Tomorrow', 1], ['In 3 days', 3], ['Next week', 7], ['In 2 weeks', 14]].map(([l, d]) => `<button type="button" class="btn sm" data-due="${addDays(todayISO(), d)}">${l}</button>`).join('')}<button type="button" class="btn sm ghost" data-due="">No due date</button></div>`;
+  openModal({ title: id ? 'Edit note' : 'New note', extra: id ? '<button class="btn danger" id="ndel">Delete</button>' : '', body: stamp + fieldsHTML(spec, n) + quick,
+    onOpen: root => {
+      const ta = root.querySelector('textarea'); if (ta) ta.style.minHeight = '220px';
+      root.addEventListener('click', e => { const b = e.target.closest('[data-due]'); if (b) root.querySelector('[data-k="due"]').value = b.dataset.due; });
+      root.closest('.modal').querySelector('#ndel')?.addEventListener('click', () => { S.notes = S.notes.filter(x => x.id !== id); saveNotes(); closeModal(); scheduleRender(true); });
+    },
+    onSave: root => { const v = readFields(spec, root); const now = new Date().toISOString(); if (id) Object.assign(n, v, { updated: now }); else S.notes.push({ id: uid('n'), ...v, created: now, updated: now }); saveNotes(); scheduleRender(true); } });
+};
+
+/* at-a-glance panel in the right rail */
+function glanceHTML() {
+  const t0 = todayISO(), open = S.todos.filter(t => !t.done);
+  const late = open.filter(t => t.due && t.due < t0).length, today = open.filter(t => t.due === t0).length, crit = open.filter(t => tPri(t) === 'critical').length;
+  const nDue = S.notes.filter(n => n.due && n.due >= t0 && n.due <= addDays(t0, 7)).length;
+  const next = [...open.filter(t => t.due && t.due >= t0).map(t => ({ d: t.due, t: t.text, p: tPri(t) })), ...S.notes.filter(n => n.due && n.due >= t0).map(n => ({ d: n.due, t: n.title || 'Untitled note', p: 'note' }))].sort((a, b) => a.d.localeCompare(b.d)).slice(0, 4);
+  const L = (k, v, l, n, cls) => `<button data-act="glance" data-k="${k}" data-v="${v}"><span>${l}</span><b class="${n ? cls : ''}">${n}</b></button>`;
+  return `<div class="eyebrow">At a glance</div>
+    ${L('tdDue', 'overdue', 'Overdue tasks', late, 'bad')}${L('tdDue', 'today', 'Tasks due today', today, 'warn')}${L('tdPri', 'critical', 'Critical tasks', crit, 'bad')}${L('nF', 'week', 'Notes due in 7 days', nDue, 'cy')}
+    ${next.length ? `<div class="eyebrow" style="margin-top:6px">Coming up</div>${next.map(x => `<div class="gl-it"><span class="num">${fshort(x.d)}</span><span>${esc(x.t)}</span></div>`).join('')}` : ''}`;
+}
+ACT.glance = el => {
+  const k = el.dataset.k, v = el.dataset.v;
+  if (k === 'nF') { S.ui.nF = v; } else { ['tdPri', 'tdDue', 'tdProj', 'tdQ'].forEach(x => delete S.ui[x]); S.ui.tdSt = 'open'; S.ui[k] = v; }
+  if (S.route.page !== 'dashboard') go('dashboard'); else scheduleRender(true);
+  setTimeout(() => $(k === 'nF' ? '.notesbox' : '.todobox')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 30);
 };
 
 'use strict';
@@ -1577,12 +1795,22 @@ const QE_TYPES = [
   ['Residential — economy', 25000, 32000], ['Residential — standard', 32000, 45000], ['Residential — high-end', 45000, 75000],
   ['Commercial / office', 38000, 60000], ['Institutional (school, clinic)', 30000, 45000], ['Warehouse / industrial shed', 16000, 26000], ['Fit-out / renovation', 12000, 30000],
 ];
+const curRate = () => S.settings.currency === 'PHP' ? 1 : 1 / (num(S.settings.rates?.[S.settings.currency]) || 1);
+/* rate per m² for the quick estimate, in the display currency. Ranges are saved in PHP. */
+function qeRates(q) {
+  const t = QE_TYPES[num(q.type)] || QE_TYPES[0], sv = (S.settings.qeRates || {})[t[0]], cr = curRate();
+  const dlo = (sv?.lo ?? t[1]) * cr, dhi = (sv?.hi ?? t[2]) * cr;
+  const lo = q.lo != null && q.lo !== '' ? num(q.lo) : dlo, hi = q.hi != null && q.hi !== '' ? num(q.hi) : dhi, mid = (lo + hi) / 2;
+  const level = q.level || 'mid', pick = level === 'custom' ? num(q.rate) : level === 'low' ? lo : level === 'high' ? hi : mid;
+  return { t, lo, hi, mid, pick, level, saved: !!sv, edited: (q.lo != null && q.lo !== '' && num(q.lo) !== dlo) || (q.hi != null && q.hi !== '' && num(q.hi) !== dhi), base: [t[1] * cr, t[2] * cr] };
+}
+const rnd = v => String(Math.round(num(v) * 100) / 100);
 VIEWS.tools = function () {
   const tab = S.ui.convTab || 'unit';
   return `<div class="page-head"><h1>Quick tools</h1><p>Fast answers that don't need a full project: a quick estimate you can push into a BOQ, and conversions between units, strengths, sizes and codes.</p></div>
   <div class="grid2">
     ${quickEstimate()}
-    <section class="box"><header><h2>Conversion tools</h2></header><div class="bd">
+    <section class="box"><header><h2>Conversion tools</h2></header><div class="bd convbd">
       <nav class="tabs" style="margin-bottom:0" aria-label="Conversions">${[['unit', 'Unit'], ['strength', 'Strength'], ['size', 'Distance & size'], ['codes', 'Codes'], ['other', 'Other']].map(([k, l], i) => `<button data-act="convTab" data-tab="${k}" aria-current="${k === tab}">${i + 1}. ${l}</button>`).join('')}</nav>
       ${CONV[tab]()}
     </div></section>
@@ -1594,14 +1822,24 @@ VIEWS.tools = function () {
 ACT.convTab = el => { S.ui.convTab = el.dataset.tab; scheduleRender(true); };
 function quickEstimate() {
   const q = S.ui.qe || (S.ui.qe = { mode: 'area', type: 0, area: 120, floors: 2, level: 'mid', recipe: 'conc', qty: 10, pid: '' });
-  const rate = S.settings.currency === 'PHP' ? 1 : 1 / num(S.settings.rates?.[S.settings.currency] || 1);
   let out = '';
   if (q.mode === 'area') {
-    const t = QE_TYPES[num(q.type)] || QE_TYPES[0], lo = t[1] * rate, hi = t[2] * rate, mid = (lo + hi) / 2;
-    const A = num(q.area) * Math.max(1, num(q.floors)), pick = q.level === 'low' ? lo : q.level === 'high' ? hi : mid;
-    out = `<div class="kpis"><div class="kpi"><div class="l">Gross floor area</div><div class="v">${fmt(A, 1)}<small>m²</small></div></div><div class="kpi"><div class="l">Rate used</div><div class="v">${moneyK(pick)}<small>/m²</small></div><div class="s">range ${moneyK(lo)}–${moneyK(hi)}</div></div><div class="kpi"><div class="l">Estimate</div><div class="v">${moneyK(A * pick)}</div><div class="s">${moneyK(A * lo)} to ${moneyK(A * hi)}</div></div></div>
+    const R = qeRates(q), A = num(q.area) * Math.max(1, num(q.floors)), pick = R.pick, cs = CUR[S.settings.currency] || '';
+    const lvl = [['low', 'Low', R.lo], ['mid', 'Mid', R.mid], ['high', 'High', R.hi], ['custom', 'Custom', null]];
+    out = `<div class="qe-rate">
+      <div class="eyebrow">Rate per m² ${q.vatIncl === false ? '(before VAT)' : '(VAT-inclusive)'}</div>
+      <div class="seg wide" role="group" aria-label="Rate basis">${lvl.map(([k, l, v]) => `<button type="button" data-act="qeLevel" data-v="${k}" aria-pressed="${R.level === k}">${l}${v != null ? ` <small class="num">${moneyK(v)}</small>` : ''}</button>`).join('')}</div>
+      <div class="fields">
+        <div class="f"><label for="qe-rate">Rate used (${cs} per m²)</label><input id="qe-rate" class="big num" data-qe="rate" inputmode="decimal" value="${esc(R.level === 'custom' ? q.rate ?? '' : rnd(pick))}" placeholder="e.g. 20000"></div>
+        <div class="f"><label for="qe-lo">Range low (${cs}/m²)</label><input id="qe-lo" class="num" data-qe="lo" inputmode="decimal" value="${esc(q.lo ?? rnd(R.lo))}"></div>
+        <div class="f"><label for="qe-hi">Range high (${cs}/m²)</label><input id="qe-hi" class="num" data-qe="hi" inputmode="decimal" value="${esc(q.hi ?? rnd(R.hi))}"></div>
+        <div class="f chk"><input type="checkbox" id="qe-vat" data-qe="vatIncl" ${q.vatIncl === false ? '' : 'checked'}><label for="qe-vat" style="color:var(--ink);font-size:13px">Rate includes VAT</label></div>
+      </div>
+      <div class="row" style="font-size:12px"><span class="faint">Type the client's rate in “Rate used” (for example 20000) to switch to Custom. ${R.saved ? 'Using your saved range for this type.' : `Built-in range ${moneyK(R.base[0])}–${moneyK(R.base[1])}.`}</span><span style="flex:1"></span>${R.edited ? '<button class="btn sm" data-act="qeSaveRange">Save range as my default</button>' : ''}${R.saved ? '<button class="btn sm ghost" data-act="qeResetRange">Restore built-in range</button>' : ''}</div>
+    </div>
+    <div class="kpis"><div class="kpi"><div class="l">Gross floor area</div><div class="v">${fmt(A, 1)}<small>m²</small></div></div><div class="kpi"><div class="l">Rate used · ${R.level === 'custom' ? 'custom' : R.level}</div><div class="v">${moneyK(pick)}<small>/m²</small></div><div class="s">range ${moneyK(R.lo)}–${moneyK(R.hi)}</div></div><div class="kpi"><div class="l">Estimate</div><div class="v">${moneyK(A * pick)}</div><div class="s">${moneyK(A * R.lo)} to ${moneyK(A * R.hi)}</div></div></div>
     <div class="tw"><table class="t"><thead><tr><th>Typical split</th><th class="n">Share</th><th class="n">Amount</th></tr></thead><tbody>${[['Structural (earthworks, concrete, steel)', 38], ['Architectural (masonry, finishes, doors & windows)', 32], ['Roofing', 7], ['Plumbing & sanitary', 8], ['Electrical', 9], ['General requirements & indirects', 6]].map(([n, s]) => `<tr><td>${n}</td><td class="n">${s}%</td><td class="n">${money(A * pick * s / 100, 0)}</td></tr>`).join('')}</tbody></table></div>
-    <p class="faint" style="margin:0;font-size:12px">Indicative Philippine 2026 cost-per-m² ranges (VAT-inclusive); use them for early budgets only and adjust to your market.</p>
+    <p class="faint" style="margin:0;font-size:12px">Built-in ranges are indicative Philippine 2026 cost-per-m² figures (VAT-inclusive) for early budgets. Edit the range or type your own rate to match your market or the client's budget.</p>
     <div class="row"><button class="btn pri" data-act="qeAddArea">+ Add to quotation</button></div>`;
   } else {
     const r = RECIPES.find(x => x.k === q.recipe) || RECIPES[0];
@@ -1615,12 +1853,14 @@ function quickEstimate() {
     <div class="fields">${q.mode === 'area' ? `
       <div class="f full"><label for="qe-type">Building type</label><select id="qe-type" data-qe="type">${QE_TYPES.map((t, i) => `<option value="${i}"${i == q.type ? ' selected' : ''}>${esc(t[0])}</option>`).join('')}</select></div>
       <div class="f"><label for="qe-area">Floor area per level (m²)</label><input id="qe-area" data-qe="area" inputmode="decimal" value="${esc(q.area)}"></div>
-      <div class="f"><label for="qe-floors">Floors</label><input id="qe-floors" data-qe="floors" inputmode="decimal" value="${esc(q.floors)}"></div>
-      <div class="f"><label for="qe-level">Finish level</label><select id="qe-level" data-qe="level">${[['low', 'Low end of range'], ['mid', 'Mid-range'], ['high', 'High end of range']].map(([a, b]) => `<option value="${a}"${a === q.level ? ' selected' : ''}>${b}</option>`).join('')}</select></div>` : `
+      <div class="f"><label for="qe-floors">Floors</label><input id="qe-floors" data-qe="floors" inputmode="decimal" value="${esc(q.floors)}"></div>` : `
       <div class="f full"><label for="qe-recipe">Scope of work</label><select id="qe-recipe" data-qe="recipe">${RECIPES.map(r => `<option value="${r.k}"${r.k === q.recipe ? ' selected' : ''}>${esc(r.desc)} (${r.unit})</option>`).join('')}</select></div>
       <div class="f"><label for="qe-qty">Quantity</label><input id="qe-qty" data-qe="qty" inputmode="decimal" value="${esc(q.qty)}"></div>`}
     </div>${out}</div></section>`;
 }
+ACT.qeLevel = el => { const q = S.ui.qe, v = el.dataset.v; if (v === 'custom' && q.level !== 'custom') q.rate = rnd(qeRates(q).pick); q.level = v; scheduleRender(true); if (v === 'custom') setTimeout(() => { const i = $('#qe-rate'); i?.focus(); i?.select(); }, 0); };
+ACT.qeSaveRange = () => { const q = S.ui.qe, R = qeRates(q), cr = curRate(); const all = { ...(S.settings.qeRates || {}) }; all[R.t[0]] = { lo: Math.round(R.lo / cr), hi: Math.round(R.hi / cr) }; delete q.lo; delete q.hi; setSetting('qeRates', all); toast(`Saved ${R.t[0]} range as your default.`); };
+ACT.qeResetRange = () => { const q = S.ui.qe, R = qeRates(q); const all = { ...(S.settings.qeRates || {}) }; delete all[R.t[0]]; delete q.lo; delete q.hi; setSetting('qeRates', all); toast('Built-in range restored.'); };
 ACT.qeToBoq = async () => {
   const q = S.ui.qe, r = RECIPES.find(x => x.k === q.recipe), x = recipeItem(r, num(q.qty)), pid = q.pid;
   const path = sheetPath(pid, 'boq'); const s = await S.db.doc(path).get(); const boq = s.exists ? s.data() : blankSheet('boq');
@@ -1649,13 +1889,15 @@ function convUnit(v, cat, a, b) {
   return v * UNITS[cat][a] / UNITS[cat][b];
 }
 const CONV = {};
+ACT.cuSwap = () => { const u = S.ui.cu; [u.a, u.b] = [u.b, u.a]; scheduleRender(true); };
 CONV.unit = () => {
   const u = S.ui.cu || (S.ui.cu = { cat: 'Length', a: 'ft', b: 'm', v: 10 });
   const units = Object.keys(UNITS[u.cat]); if (!units.includes(u.a)) u.a = units[0]; if (!units.includes(u.b)) u.b = units[1];
   const r = convUnit(num(u.v), u.cat, u.a, u.b);
   return `<div class="fields"><div class="f full"><label for="cu-cat">Quantity</label><select id="cu-cat" data-cu="cat">${Object.keys(UNITS).map(k => `<option${k === u.cat ? ' selected' : ''}>${k}</option>`).join('')}</select></div></div>
-  <div class="conv"><div class="f"><label for="cu-v">From</label><div class="row" style="flex-wrap:nowrap"><input id="cu-v" class="search" data-cu="v" inputmode="decimal" value="${esc(u.v)}" style="flex:1;min-width:0"><select class="search" id="cu-a" data-cu="a" aria-label="From unit">${units.map(k => `<option${k === u.a ? ' selected' : ''}>${esc(k)}</option>`).join('')}</select></div></div><div class="eq">=</div>
-  <div class="f"><label for="cu-b">To</label><div class="row" style="flex-wrap:nowrap"><output class="search num" style="flex:1;min-width:0;font-weight:600">${fmtSig(r)}</output><select class="search" id="cu-b" data-cu="b" aria-label="To unit">${units.map(k => `<option${k === u.b ? ' selected' : ''}>${esc(k)}</option>`).join('')}</select></div></div></div>
+  <div class="conv cv"><div class="f"><label for="cu-v">From</label><div class="cv-row"><input id="cu-v" class="cv-val" data-cu="v" inputmode="decimal" value="${esc(u.v)}"><select class="search" id="cu-a" data-cu="a" aria-label="From unit">${units.map(k => `<option${k === u.a ? ' selected' : ''}>${esc(k)}</option>`).join('')}</select></div></div>
+  <button type="button" class="cv-swap" data-act="cuSwap" title="Swap units" aria-label="Swap from and to units"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v14M3 14l4 4 4-4M17 20V6M13 10l4-4 4 4"/></svg></button>
+  <div class="f"><label for="cu-b">To</label><div class="cv-row"><output class="cv-val out num" for="cu-v cu-a cu-b">${fmtSig(r)}</output><select class="search" id="cu-b" data-cu="b" aria-label="To unit">${units.map(k => `<option${k === u.b ? ' selected' : ''}>${esc(k)}</option>`).join('')}</select></div></div></div>
   <div class="tw"><table class="t"><tbody>${units.filter(k => k !== u.a).map(k => `<tr><td class="num">${esc(k)}</td><td class="n">${fmtSig(convUnit(num(u.v), u.cat, u.a, k))}</td></tr>`).join('')}</tbody></table></div>`;
 };
 function fmtSig(x) { if (!isFinite(x)) return '—'; const a = Math.abs(x); if (a !== 0 && (a < 1e-4 || a >= 1e12)) return x.toExponential(5); return Number(x.toPrecision(8)).toLocaleString('en-US', { maximumFractionDigits: 6 }); }
@@ -1664,7 +1906,7 @@ CONV.strength = () => {
   const MPa = u === 'psi' ? num(v) * 0.00689475729 : u === 'ksc' ? num(v) * 0.0980665 : num(v);
   const EC = [[12, 15], [16, 20], [20, 25], [25, 30], [30, 37], [35, 45], [40, 50], [45, 55], [50, 60]];
   const near = EC.reduce((b, c) => c[0] <= MPa + 1e-9 ? c : b, null);
-  return `<div class="conv"><div class="f"><label for="cs-v">Concrete strength</label><div class="row" style="flex-wrap:nowrap"><input id="cs-v" class="search" data-ui="cs" inputmode="decimal" value="${esc(v)}" style="flex:1;min-width:0"><select class="search" id="cs-u" data-ui="csu" aria-label="Unit">${[['psi', 'psi'], ['MPa', 'MPa'], ['ksc', 'kg/cm²']].map(([a, b]) => `<option value="${a}"${a === u ? ' selected' : ''}>${b}</option>`).join('')}</select></div></div><div class="eq">=</div>
+  return `<div class="conv cv"><div class="f"><label for="cs-v">Concrete strength</label><div class="cv-row"><input id="cs-v" class="cv-val" data-ui="cs" inputmode="decimal" value="${esc(v)}"><select class="search" id="cs-u" data-ui="csu" aria-label="Unit">${[['psi', 'psi'], ['MPa', 'MPa'], ['ksc', 'kg/cm²']].map(([a, b]) => `<option value="${a}"${a === u ? ' selected' : ''}>${b}</option>`).join('')}</select></div></div><div class="eq">=</div>
   <div class="kpi"><div class="l">Cylinder strength</div><div class="v">${fmt(MPa, 2)}<small>MPa</small></div><div class="s">${fmt(MPa / 0.00689475729, 0)} psi · ${fmt(MPa / 0.0980665, 1)} kg/cm²</div></div></div>
   <div class="msg">${near ? `Nearest Eurocode class not above it: <b>C${near[0]}/${near[1]}</b> (fck,cyl ${near[0]} MPa / fck,cube ${near[1]} MPa).` : 'Below C12/15.'} Cube strength is roughly 1.25 × cylinder strength for normal-weight concrete.</div>
   <div class="tw"><table class="t"><thead><tr><th>Concrete (PH spec)</th><th class="n">fc′ MPa</th><th>Closest EN 206 class</th></tr></thead><tbody>${[[2500, 'C16/20'], [3000, 'C20/25'], [3500, 'C20/25 – C25/30'], [4000, 'C25/30'], [5000, 'C30/37 – C35/45']].map(([p, c]) => `<tr><td class="num">${p} psi</td><td class="n">${fmt(p * 0.00689475729, 1)}</td><td>${c}</td></tr>`).join('')}</tbody></table></div>
@@ -1677,8 +1919,8 @@ CONV.size = () => {
   const fi = S.ui.fi || "10' 6 1/2\"";
   const mm = parseFtIn(fi);
   const mmv = S.ui.mmv ?? 3215;
-  return `<div class="conv"><div class="f"><label for="fi">Feet-inches (e.g. 10' 6 1/2")</label><input id="fi" class="search" data-ui="fi" value="${esc(fi)}"></div><div class="eq">=</div><div class="kpi"><div class="l">Millimetres</div><div class="v">${mm == null ? '—' : fmt(mm, 1)}<small>mm</small></div></div></div>
-  <div class="conv"><div class="f"><label for="mmv">Millimetres</label><input id="mmv" class="search" data-ui="mmv" inputmode="decimal" value="${esc(mmv)}"></div><div class="eq">=</div><div class="kpi"><div class="l">Feet-inches (nearest 1/16")</div><div class="v" style="font-size:17px">${toFtIn(num(mmv))}</div></div></div>
+  return `<div class="conv cv"><div class="f"><label for="fi">Feet-inches (e.g. 10' 6 1/2")</label><input id="fi" class="cv-val" data-ui="fi" value="${esc(fi)}"></div><div class="eq">=</div><div class="kpi"><div class="l">Millimetres</div><div class="v">${mm == null ? '—' : fmt(mm, 1)}<small>mm</small></div></div></div>
+  <div class="conv cv"><div class="f"><label for="mmv">Millimetres</label><input id="mmv" class="cv-val" data-ui="mmv" inputmode="decimal" value="${esc(mmv)}"></div><div class="eq">=</div><div class="kpi"><div class="l">Feet-inches (nearest 1/16")</div><div class="v" style="font-size:17px">${toFtIn(num(mmv))}</div></div></div>
   <div class="grid2"><div class="tw"><table class="t"><thead><tr><th>Bar</th><th class="n">Ø mm</th><th class="n">Area mm²</th><th class="n">kg/m</th></tr></thead><tbody>${[['#3', 10], ['#4', 12], ['#5', 16], ['#6', 20], ['#7', 22], ['#8', 25], ['#9', 28], ['#10', 32], ['#11', 36]].map(([b, d]) => `<tr><td>${b} ≈ ${d} mm</td><td class="n">${d}</td><td class="n">${fmt(Math.PI * d * d / 4, 1)}</td><td class="n">${fmt(d * d / 162.2, 3)}</td></tr>`).join('')}</tbody></table></div>
   <div class="tw"><table class="t"><thead><tr><th>Pipe</th><th>DN</th><th class="n">OD mm</th></tr></thead><tbody>${[['½"', 15, 21.3], ['¾"', 20, 26.7], ['1"', 25, 33.4], ['1¼"', 32, 42.2], ['1½"', 40, 48.3], ['2"', 50, 60.3], ['2½"', 65, 73.0], ['3"', 80, 88.9], ['4"', 100, 114.3], ['6"', 150, 168.3]].map(([a, b, c]) => `<tr><td>${a}</td><td class="num">DN${b}</td><td class="n">${fmt(c, 1)}</td></tr>`).join('')}</tbody></table></div></div>
   <div class="grid2"><div class="tw"><table class="t"><thead><tr><th>Lumber nominal</th><th class="n">S4S actual (in)</th><th class="n">Rough-sawn (mm)</th></tr></thead><tbody>${[['2×2', '1½ × 1½', '50 × 50'], ['2×3', '1½ × 2½', '50 × 75'], ['2×4', '1½ × 3½', '50 × 100'], ['2×6', '1½ × 5½', '50 × 150'], ['2×8', '1½ × 7¼', '50 × 200'], ['2×10', '1½ × 9¼', '50 × 250'], ['2×12', '1½ × 11¼', '50 × 300']].map(r => `<tr><td>${r[0]}</td><td class="n">${r[1]}</td><td class="n">${r[2]}</td></tr>`).join('')}</tbody></table></div>
@@ -1708,9 +1950,9 @@ CONV.other = () => {
   const sl = num(o.slope), deg = Math.atan(sl / 100) * 180 / Math.PI;
   const R = { PHP: 1, BND: num(S.settings.rates?.BND) || 43.5, USD: num(S.settings.rates?.USD) || 58 };
   const inPHP = num(o.amt) * R[o.cur];
-  return `<div class="grid2"><div class="refcard"><h4>Slope</h4><div class="f"><label for="co-slope">Slope %</label><input id="co-slope" class="search" data-co="slope" inputmode="decimal" value="${esc(o.slope)}"></div><div class="num" style="font-size:13px">${fmt(deg, 3)}° · 1 : ${sl ? fmt(100 / sl, 2) : '∞'} · ${fmt(sl * 12 / 100, 3)} in per ft</div></div>
-  <div class="refcard"><h4>Currency (your rates)</h4><div class="row" style="flex-wrap:nowrap"><input class="search" id="co-amt" data-co="amt" inputmode="decimal" value="${esc(o.amt)}" style="flex:1;min-width:0" aria-label="Amount"><select class="search" id="co-cur" data-co="cur" aria-label="Currency">${['PHP', 'BND', 'USD'].map(c => `<option${c === o.cur ? ' selected' : ''}>${c}</option>`).join('')}</select></div><div class="num" style="font-size:13px">₱${fmt(inPHP, 2)} · B$${fmt(inPHP / R.BND, 2)} · $${fmt(inPHP / R.USD, 2)}</div><div class="faint" style="font-size:11.5px">1 BND = ₱${fmt(R.BND, 2)}, 1 USD = ₱${fmt(R.USD, 2)}. Set these in Settings.</div></div>
-  <div class="refcard"><h4>Cement bags</h4><div class="row" style="flex-wrap:nowrap"><input class="search" id="co-bags" data-co="bags" inputmode="decimal" value="${esc(o.bags)}" style="flex:1;min-width:0" aria-label="Number of bags"><select class="search" id="co-bag" data-co="bag" aria-label="Bag size"><option value="40"${o.bag == 40 ? ' selected' : ''}>× 40 kg</option><option value="50"${o.bag == 50 ? ' selected' : ''}>× 50 kg</option></select></div><div class="num" style="font-size:13px">${fmt(num(o.bags) * num(o.bag), 0)} kg = ${fmt(num(o.bags) * num(o.bag) / (o.bag == 40 ? 50 : 40), 1)} bags of ${o.bag == 40 ? 50 : 40} kg · ${fmt(num(o.bags) * num(o.bag) / 1440, 3)} m³ loose</div></div>
+  return `<div class="grid2"><div class="refcard"><h4>Slope</h4><div class="f"><label for="co-slope">Slope %</label><input id="co-slope" class="cv-val" data-co="slope" inputmode="decimal" value="${esc(o.slope)}"></div><div class="num" style="font-size:13px">${fmt(deg, 3)}° · 1 : ${sl ? fmt(100 / sl, 2) : '∞'} · ${fmt(sl * 12 / 100, 3)} in per ft</div></div>
+  <div class="refcard"><h4>Currency (your rates)</h4><div class="cv-row"><input class="cv-val" id="co-amt" data-co="amt" inputmode="decimal" value="${esc(o.amt)}" aria-label="Amount"><select class="search" id="co-cur" data-co="cur" aria-label="Currency">${['PHP', 'BND', 'USD'].map(c => `<option${c === o.cur ? ' selected' : ''}>${c}</option>`).join('')}</select></div><div class="num" style="font-size:13px;overflow-wrap:anywhere">₱${fmt(inPHP, 2)} · B$${fmt(inPHP / R.BND, 2)} · $${fmt(inPHP / R.USD, 2)}</div><div class="faint" style="font-size:11.5px">1 BND = ₱${fmt(R.BND, 2)}, 1 USD = ₱${fmt(R.USD, 2)}. Set these in Settings.</div></div>
+  <div class="refcard"><h4>Cement bags</h4><div class="cv-row"><input class="cv-val" id="co-bags" data-co="bags" inputmode="decimal" value="${esc(o.bags)}" aria-label="Number of bags"><select class="search" id="co-bag" data-co="bag" aria-label="Bag size"><option value="40"${o.bag == 40 ? ' selected' : ''}>× 40 kg</option><option value="50"${o.bag == 50 ? ' selected' : ''}>× 50 kg</option></select></div><div class="num" style="font-size:13px;overflow-wrap:anywhere">${fmt(num(o.bags) * num(o.bag), 0)} kg = ${fmt(num(o.bags) * num(o.bag) / (o.bag == 40 ? 50 : 40), 1)} bags of ${o.bag == 40 ? 50 : 40} kg · ${fmt(num(o.bags) * num(o.bag) / 1440, 3)} m³ loose</div></div>
   <div class="refcard"><h4>Rules of thumb</h4><div style="font-size:12.5px;display:grid;gap:3px"><span>Concrete: 2,400 kg/m³ · 23.6 kN/m³</span><span>Steel: 7,850 kg/m³ · 77 kN/m³</span><span>Water: 1,000 kg/m³ · 1 L = 1 kg</span><span>Rebar: kg/m = d² / 162.2</span><span>1 bd ft = 144 in³ = 0.00236 m³</span><span>1 TR = 12,000 BTU/h = 3.517 kW</span></div></div></div>`;
 };
 
@@ -1773,11 +2015,11 @@ ACT.qeAddScope = () => {
   saveDraft(); scheduleRender(true); toast('Added to quotation.');
 };
 ACT.qeAddArea = () => {
-  const q = S.ui.qe, t = QE_TYPES[num(q.type)] || QE_TYPES[0];
-  const rate = S.settings.currency === 'PHP' ? 1 : 1 / num(S.settings.rates?.[S.settings.currency] || 1);
-  const lo = t[1] * rate, hi = t[2] * rate, pick = q.level === 'low' ? lo : q.level === 'high' ? hi : (lo + hi) / 2;
+  const q = S.ui.qe, R = qeRates(q), t = R.t, pick = R.pick;
+  if (!(pick > 0)) return toast('Enter a rate per m² first.');
   const A = num(q.area) * Math.max(1, num(q.floors)), qt = Q();
-  qt.lines.push({ id: uid('q'), desc: `${t[0]} building, ${fmt(num(q.floors), 0)} storey(s), ${fmt(A, 1)} m² gross floor area — complete`, qty: Math.round(A * 100) / 100, unit: 'm²', price: Math.round(pick / (qt.vatOn ? 1 + num(qt.vat) / 100 : 1) * 100) / 100 });
+  const exVat = q.vatIncl !== false && qt.vatOn ? 1 + num(qt.vat) / 100 : 1;
+  qt.lines.push({ id: uid('q'), desc: `${t[0]} building, ${fmt(num(q.floors), 0)} storey(s), ${fmt(A, 1)} m² gross floor area — complete`, qty: Math.round(A * 100) / 100, unit: 'm²', price: Math.round(pick / exVat * 100) / 100 });
   saveDraft(); scheduleRender(true); toast('Added to quotation.');
 };
 ACT.qtAddLine = () => { Q().lines.push({ id: uid('q'), desc: '', qty: 1, unit: 'lot', price: 0 }); saveDraft(); scheduleRender(true); setTimeout(() => { const i = $$('[data-qt="desc"]').pop(); i?.focus(); }, 30); };
@@ -2279,6 +2521,7 @@ function buildShell() {
     <aside class="rail" aria-label="Tools">
       <div class="clock" role="timer" aria-live="off"><div class="t">--:--</div><div class="d"></div><div class="z"></div></div>
       ${RAIL.map(([k, l, s]) => `<button class="rbtn" data-act="go" data-page="${k}" data-go="${k}">${l}${s ? `<span class="faint" style="font-weight:400;font-size:11.5px;display:block">${s}</span>` : ''}</button>`).join('')}
+      <div class="glance" id="glance" aria-label="At a glance"></div>
     </aside>
     <footer class="appfoot"><span>${APP.fullName} <button class="linkbtn num" data-act="changelog">${verText()}</button> · <button class="linkbtn" data-act="changelog">Changelog</button></span><span>A DARKWIZ Lab app · ${SITE()}</span></footer>
   </div>
@@ -2332,8 +2575,9 @@ document.addEventListener('keydown', e => {
 function uiInput(el, live) {
   const d = el.dataset;
   const val = el.type === 'checkbox' ? el.checked : el.value;
+  if (d.draft) { S.ui[d.draft] = val; return true; }
   if (d.ui != null && d.ui !== '') { S.ui[d.ui] = val; scheduleRender(true); return true; }
-  if (d.qe) { S.ui.qe[d.qe] = val; scheduleRender(true); return true; }
+  if (d.qe) { const q = S.ui.qe; q[d.qe] = val; if (d.qe === 'rate') q.level = 'custom'; if (d.qe === 'type') { delete q.lo; delete q.hi; } scheduleRender(true); return true; }
   if (d.cu) { S.ui.cu[d.cu] = val; scheduleRender(true); return true; }
   if (d.co) { S.ui.co[d.co] = val; scheduleRender(true); return true; }
   if (d.rn) { onRnChange(el); return true; }
